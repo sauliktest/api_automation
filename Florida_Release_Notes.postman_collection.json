@@ -377,7 +377,23 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													""
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"\r",
+													"    pm.expect(jsonData[0]).to.have.property(\"erros\");\r",
+													"\r",
+													"    var primeiroErro = jsonData[0].erros[0];\r",
+													"    pm.expect(primeiroErro).to.have.property(\"mensagem\").that.is.eql(\"\\\"cpf\\\" is not allowed to be empty\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -4577,7 +4593,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=999999&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=8888888888&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -4590,7 +4606,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "999999"
+													"value": "8888888888"
 												},
 												{
 													"key": "idTipoEndereco",
@@ -4900,7 +4916,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"O domínio do campo não foi respeitado\");\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"[instance value (6) not found in enum (possible values: [1,2,3,4,5])]\");\r",
 													"});\r",
 													""
 												],
@@ -15700,14 +15716,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18052,40 +18073,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});\r",
-													"\r",
-													"\r",
-													"//pm.test(\"Validar se CPF gerado = response\", function () {\r",
-													"////    var responseJson = pm.response.json();\r",
-													"//    var cpfNoResponse = responseJson.solicitacao.cpf;\r",
-													"//    var cpfGlobal = pm.globals.get(\"generatedCPF\");\r",
-													"//    pm.expect(cpfNoResponse).to.eql(cpfGlobal);\r",
+													"//pm.test(\"Status code is 200\", function () {\r",
+													" //   pm.response.to.have.status(200);\r",
 													"//});\r",
 													"\r",
-													"pm.test(\"Verificar se novo CPF é gerado e requisição é enviada novamente\", function () {\r",
-													"    // Verificar se a resposta retorna um erro de participante existente\r",
-													"    if (pm.response.code === 400 && pm.response.json().error.errorCode === \"1042\") {\r",
-													"         // Gerar novo CPF\r",
-													"               // Atualizar o campo \"numeroReceitaFederal\" com o novo CPF\r",
-													"        pm.request.body.json({\r",
-													"            \"numeroReceitaFederal\": novoCPF,\r",
-													"            // outros campos da requisição\r",
-													"        });\r",
-													"        // Enviar a requisição novamente com o novo CPF\r",
-													"        pm.sendRequest(pm.request);\r",
 													"\r",
-													"        // Verificar se o novo CPF é gerado corretamente\r",
-													"        pm.expect(novoCPF).to.exist;\r",
-													"        pm.expect(novoCPF).to.match(/^\\d{11}$/); // Verificar se o CPF possui 11 dígitos numéricos\r",
-													"\r",
-													"        // Verificar se a requisição foi enviada novamente com o novo CPF\r",
-													"        pm.expect(pm.request.url).to.equal(\"PIER011 - POST: /api/contas/{id}/cadastrar-adicional_novo(+)\"); // Substitua \"URL_DA_REQUISICAO\" pela URL correta da requisição\r",
-													"        pm.expect(pm.request.body.json().numeroReceitaFederal).to.equal(novoCPF)\r",
-													"        \r",
-													"    }\r",
-													"});\r",
 													""
 												],
 												"type": "text/javascript"
