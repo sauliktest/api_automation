@@ -5678,6 +5678,8 @@
 													"    const nomeCampo = responseBody.status; \r",
 													"    pm.expect(nomeCampo).to.not.equal(null);\r",
 													"});\r",
+													"\r",
+													"\r",
 													""
 												],
 												"type": "text/javascript"
@@ -5885,12 +5887,13 @@
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"não deve ser mais curta que 2 caracteres\");\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
 													"});\r",
 													"\r",
 													"// Verifica se o campo não é nulo\r",
@@ -5971,14 +5974,14 @@
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"não deve ser mais curta que 2 caracteres\");\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
 													"});\r",
-													"\r",
 													"\r",
 													"\r",
 													""
@@ -6041,23 +6044,26 @@
 									"response": []
 								},
 								{
-									"name": "PIER138 - POST: /api/telefones_ddd_inicio_Zero(+)",
+									"name": "PIER138 - POST: /api/telefones_ddd_inicio_Zero(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.ok;\r",
+													"     pm.response.to.be.badRequest\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
 													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
+													"});\r",
 													"\r",
 													"\r",
 													"\r",
@@ -6121,20 +6127,24 @@
 									"response": []
 								},
 								{
-									"name": "PIER138 - POST: /api/telefones_ddd_somente_Zero(+)",
+									"name": "PIER138 - POST: /api/telefones_ddd_somente_Zero(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"      pm.response.to.be.ok;;\r",
+													"     pm.response.to.be.badRequest;;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
 													"});\r",
 													"\r",
 													"\r",
@@ -6210,13 +6220,16 @@
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
+													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"não deve ser mais curta que 2 caracteres\");\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
 													"});\r",
+													"\r",
 													"\r",
 													"\r",
 													"\r",
@@ -6291,15 +6304,14 @@
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"não deve ser maior que 2 caracteres\");\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"phone, areaCode ou countryCode informado não estão de acordo com o padrão\");\r",
 													"});\r",
-													"\r",
-													"\r",
 													"\r",
 													""
 												],
@@ -6526,18 +6538,21 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 404\", function () {\r",
-													"    pm.response.to.have.status(404);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
 													"  pm.response.to.have.jsonBody(\"error.message\", \"O participante informado é inexistente\");\r",
 													"});\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.withBody;\r",
-													"     pm.response.to.be.json;\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -6560,7 +6575,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=111111111&ramal=10",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=54667788&ramal=10",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -6585,7 +6600,7 @@
 												},
 												{
 													"key": "telefone",
-													"value": "111111111"
+													"value": "54667788"
 												},
 												{
 													"key": "ramal",
@@ -6607,14 +6622,16 @@
 													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
 													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
 													"});\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.withBody;\r",
-													"     pm.response.to.be.json;\r",
-													"});\r",
 													"\r",
 													""
 												],
@@ -6834,6 +6851,85 @@
 									"response": []
 								},
 								{
+									"name": "PIER138 - POST: /api/telefones_tipotelefone_fora_dominio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"ID do tipo de telefone inválido.\");\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=6&idPessoa=1323&ddd=11&telefone=991882511&ramal=22",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "6"
+												},
+												{
+													"key": "idPessoa",
+													"value": "1323"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "991882511"
+												},
+												{
+													"key": "ramal",
+													"value": "22"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER138 - POST: /api/telefones_ramal_letra(-)",
 									"event": [
 										{
@@ -6916,7 +7012,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER137 - GET: /api/telefones_existente(+)",
+									"name": "PIER137 - GET: /api/telefones_id_pessoa_existente(+)",
 									"event": [
 										{
 											"listen": "test",
@@ -6934,10 +7030,9 @@
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
-													"\r",
 													"pm.test(\"Buscar por ID existente e valida se o id na resposta é mesmo informado na busca\", function () {\r",
 													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.content[0].idPessoa).to.eql(1444);\r",
+													"    pm.expect(jsonData.content[0].idPessoa).to.eql(1323);\r",
 													"});\r",
 													"  \r",
 													" const schema = {\r",
@@ -7217,7 +7312,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=1444",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -7230,7 +7325,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1444"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -7309,8 +7404,8 @@
 											"script": {
 												"exec": [
 													"\r",
-													"pm.test(\"Status code is 404\", function () {\r",
-													"    pm.response.to.have.status(404);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Valida mensagem de erro\", function () {\r",
@@ -7453,12 +7548,6 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"const responseJson = pm.response.json();\r",
-													"pm.test(\"Campo 'id' não é vazio\", function () {\r",
-													"   pm.expect(responseJson.id).not.to.equal(\"\");\r",
-													" });\r",
-													"\r",
-													"\r",
 													" //pm.test(\"Campo 'id' está presente\", function () {\r",
 													" //  pm.expect(responseJson).to.have.property(\"id\");\r",
 													"// });\r",
@@ -7478,20 +7567,15 @@
 													"   pm.expect(responseJson.idTipoTelefone).not.to.equal(\"\");\r",
 													" });\r",
 													"\r",
-													" //pm.test(\"Campo 'idTipoTelefone' está presente\", function () {\r",
-													" //  pm.expect(responseJson).to.have.property(\"idTipoTelefone\");\r",
-													"///});\r",
-													"\r",
 													"// pm.test(\"Campo 'idTipoTelefone' é numérico\", function (){ \r",
 													" //   pm.expect(responseJson.idTipoTelefone).to.be.a(\"number\");\r",
 													" //});\r",
-													"\r",
 													"\r",
 													"pm.test(\"Check 'idTipoTelefone' 1, 2 ou 3\", function() {\r",
 													"    pm.expect(responseJson.idTipoTelefone).to.be.oneOf([1, 2, 3]);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Buscar por ID existente e validar se o id da resposta é mesmo informado na busca\", function () {\r",
+													"pm.test(\"Buscar por ID existente e valida se o id da resposta é mesmo informado na busca\", function () {\r",
 													"    var jsonData = pm.response.json();\r",
 													"    pm.expect(jsonData.id).to.eql(2879);\r",
 													"});\r",
@@ -7502,93 +7586,7 @@
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
-													"const schema = {\r",
-													"    \"type\": \"object\",\r",
-													"    \"default\": {},\r",
-													"    \"title\": \"Root Schema\",\r",
-													"    \"required\": [\r",
-													"        \"id\",\r",
-													"        \"idTipoTelefone\",\r",
-													"        \"idPessoa\",\r",
-													"        \"ddd\",\r",
-													"        \"telefone\",\r",
-													"        \"ramal\",\r",
-													"        \"status\"\r",
-													"    ],\r",
-													"    \"properties\": {\r",
-													"        \"id\": {\r",
-													"            \"type\": \"string\",\r",
-													"            \"default\": 0,\r",
-													"            \"title\": \"The id Schema\",\r",
-													"            \"examples\": [\r",
-													"                2879\r",
-													"            ]\r",
-													"        },\r",
-													"        \"idTipoTelefone\": {\r",
-													"            \"type\": \"integer\",\r",
-													"            \"default\": 0,\r",
-													"            \"title\": \"The idTipoTelefone Schema\",\r",
-													"            \"examples\": [\r",
-													"                3\r",
-													"            ]\r",
-													"        },\r",
-													"        \"idPessoa\": {\r",
-													"            \"type\": \"integer\",\r",
-													"            \"default\": 0,\r",
-													"            \"title\": \"The idPessoa Schema\",\r",
-													"            \"examples\": [\r",
-													"                1444\r",
-													"            ]\r",
-													"        },\r",
-													"        \"ddd\": {\r",
-													"            \"type\": \"string\",\r",
-													"            \"default\": \"\",\r",
-													"            \"title\": \"The ddd Schema\",\r",
-													"            \"examples\": [\r",
-													"                \"11\"\r",
-													"            ]\r",
-													"        },\r",
-													"        \"telefone\": {\r",
-													"            \"type\": \"string\",\r",
-													"            \"default\": \"\",\r",
-													"            \"title\": \"The telefone Schema\",\r",
-													"            \"examples\": [\r",
-													"                \"991886199\"\r",
-													"            ]\r",
-													"        },\r",
-													"        \"ramal\": {\r",
-													"            \"type\": \"string\",\r",
-													"            \"default\": \"\",\r",
-													"            \"title\": \"The ramal Schema\",\r",
-													"            \"examples\": [\r",
-													"                \"1234\"\r",
-													"            ]\r",
-													"        },\r",
-													"        \"status\": {\r",
-													"            \"type\": \"integer\",\r",
-													"            \"default\": 0,\r",
-													"            \"title\": \"The status Schema\",\r",
-													"            \"examples\": [\r",
-													"                1\r",
-													"            ]\r",
-													"        }\r",
-													"    },\r",
-													"    \"examples\": [{\r",
-													"        \"id\": 2879,\r",
-													"        \"idTipoTelefone\": 3,\r",
-													"        \"idPessoa\": 1444,\r",
-													"        \"ddd\": \"11\",\r",
-													"        \"telefone\": \"991886199\",\r",
-													"        \"ramal\": \"1234\",\r",
-													"        \"status\": 1\r",
-													"    }]\r",
-													"}\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.ok;\r",
-													"     pm.response.to.be.withBody;\r",
-													"     pm.response.to.be.json;\r",
-													"});\r",
 													"\r",
 													""
 												],
@@ -7680,7 +7678,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones/1",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones/A",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -7689,7 +7687,7 @@
 												"telefones",
 												"api",
 												"telefones",
-												"1"
+												"A"
 											]
 										}
 									},
@@ -7708,7 +7706,7 @@
 													"\r",
 													"pm.test(\"Valida mensagem de erro\", function () {\r",
 													"    var responseBody = pm.response.json();\r",
-													"    pm.expect(responseBody.error.message).to.equal(\"Query string parameters ausentes.\");\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"Faltando query string parameters.\");\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
@@ -18424,8 +18422,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
@@ -18434,8 +18432,8 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
-													"});"
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"documentNumber inválido\");\r",
+													"})"
 												],
 												"type": "text/javascript"
 											}
