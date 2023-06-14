@@ -56,10 +56,10 @@ jobs:
         # Required recipients' addresses:
          to: sauliktest@gmail.com,Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,silvio.aulik@gmail.com,vinicius.andrade@gok.digital
         # Required sender full name (address can be skipped):
-         from: projetoflorida23@gmail.com
+         from: sauliktest@gmail.com
         # Optional plain body:
          html_body: <p>Build de Teste Realizado ;) Projeto https://github.com/${{github.repository}} </p><br>
-              <p>Link para o Dashboard de Qualidade <a href="https://florida23.github.io/aut_api/testResults/index.html">Testes Automatizados</a></p>
+            #  <p>Link para o Dashboard de Qualidade <a href="https://sauliktest.github.io/api_automation/testResults/index.html">Testes Automatizados</a></p>
          reply_to: silvio.aulik@gmail.com
         # Optional unsigned/invalid certificates allowance:
          ignore_cert: true
