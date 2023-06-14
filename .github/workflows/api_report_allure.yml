@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Automation API Tests from Postman Collection ci-integração
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  #schedule:
+  #- cron: '5 6 * * MON-FRI'
+  
+  workflow_dispatch:
+permissions: write-all
+
+jobs:
+  automated-api-integracao:
+    runs-on: windows-latest
+    steps:
+      # 1 - Step - Install dependencies.
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm install -g newman 
+          npm install -g allure-commandline --save-dev
+          npm install -g newman-reporter-allure 
+
+      # 2 - Step - Run the POSTMAN collection
+      - name: Step 2 - Run POSTMAN collection
+        if: always()
+        continue-on-error: true
+        run: |
+          newman run Florida_Release_Notes.postman_collection.json -e CI-test.postman_environment.json -r allure
+        
+      - name: Show directories
+        run: dir
+      - name: Step 3 - Collect Allure files and generate allure-report folder
+        run: |
+          allure generate ./allure-results -o allure-report/
+
+      - name: 🎁 Step 4 - Publishing Allure artifact to GitHub Actions
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+
+      - name: Send email with Allure report link
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.example.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Allure Report for Automation API Tests
+          body: |
+            Hi,
+            
+            The Allure Report for the Automation API Tests is available at the following link:
+            [Allure Report](https://sauliktest.github.io/api_automation/allure-report/)
+            
+            Best regards,
+            Silvo Aulik - Test Automation
