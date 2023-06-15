@@ -443,12 +443,25 @@
 									"response": []
 								},
 								{
-									"name": "HEIM143 - POST: /propostas/cpf_invalido(-)",
+									"name": "HEIM143 - POST: /propostas/cpf_incompleto(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData[0].erros[0].mensagem).to.equal(\"O \\\"cpf\\\" informado não é valido\");\r",
+													"});\r",
 													""
 												],
 												"type": "text/javascript"
@@ -458,7 +471,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"/"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -7397,6 +7410,74 @@
 									"response": []
 								},
 								{
+									"name": "PIER137 - GET: /api/telefones_idPessoa_listar_telefones(+)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"    pm.response.to.be.ok;\r",
+													"    pm.response.to.be.withBody;\r",
+													"    pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Validar campo idPessoa do response\", function () {\r",
+													"    var request_idPessoa = pm.request.url.query.get(\"idPessoa\");\r",
+													"    console.log(request_idPessoa);\r",
+													"    var response_idPessoa = pm.response.json().content[0].idPessoa;\r",
+													"    console.log(response_idPessoa);\r",
+													"    pm.expect(request_idPessoa).to.equal(String(response_idPessoa));\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=70000844",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "70000844"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER137 - GET: /api/telefones_idPessoa_inexistente(-)",
 									"event": [
 										{
@@ -7678,7 +7759,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones/A",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones/2879",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -7687,7 +7768,7 @@
 												"telefones",
 												"api",
 												"telefones",
-												"A"
+												"2879"
 											]
 										}
 									},
@@ -7763,19 +7844,6 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"function _isContains(json, keyname, value) {\r",
-													" return Object.keys(json).some(key => {\r",
-													"        return typeof json[key] === 'object' ? \r",
-													"        _isContains(json[key], keyname, value) : key === keyname && json[key] === value;\r",
-													"    });\r",
-													"}\r",
-													"\r",
-													"pm.test(\"Validar a estrutura do response\", function () {\r",
-													"        var jsonData = pm.response.json();\r",
-													"        pm.expect(_isContains(jsonData.error, \"errorCode\" ,\"1000\")).to.be.true;\r",
-													"        pm.expect(_isContains(jsonData.error, \"message\" ,\"Cliente não encontrado\")).to.be.true;\r",
-													"    });\r",
-													"\r",
 													"pm.test(\"Status code is 500\", function () {\r",
 													"    pm.response.to.have.status(500);\r",
 													"});\r",
@@ -7783,7 +7851,15 @@
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
-													"});"
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Cliente não encontrado\");\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"documentNumber informado não encontrado\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -8378,7 +8454,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER055 - PUT: /api/pessoas-detalhes/Validação da tag nomeMae(-)",
+									"name": "PIER055 - PUT: /api/pessoas-detalhes/nome_mae_com_conjuge(-)",
 									"event": [
 										{
 											"listen": "prerequest",
@@ -8394,16 +8470,18 @@
 											"script": {
 												"exec": [
 													" \r",
-													"    pm.test(\"GET Status code is 200\", function () {\r",
-													"        pm.response.to.have.status(200);\r",
+													"    pm.test(\"GET Status code is 400\", function () {\r",
+													"        pm.response.to.have.status(400);\r",
 													"    });\r",
 													"\r",
 													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.ok;\r",
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
 													"\r",
+													" pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"não são permitidas propriedades adicionais\");\r",
+													"});\r",
 													"\r",
 													"\r",
 													""
@@ -8955,7 +9033,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER055 - PUT: /api/pessoas-detalhes/Validação da tag NumeroContacorrente com mais de 15 caracteres(-)",
+									"name": "PIER055 - PUT: /api/pessoas-detalhes/naturalidade_#_estado(-)",
 									"event": [
 										{
 											"listen": "prerequest",
@@ -8970,17 +9048,21 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"\r",
-													"   \r",
-													"    pm.test(\"GET Status code is 200\", function () {\r",
-													"        pm.response.to.have.status(200);\r",
+													"  \r",
+													"    pm.test(\"GET Status code is 422\", function () {\r",
+													"        pm.response.to.have.status(422);\r",
 													"    });\r",
 													"\r",
 													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.ok;\r",
+													"\r",
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
+													"});\r",
+													"\r",
 													"\r",
 													"\r",
 													"\r",
@@ -9020,7 +9102,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345678910111213141516&email=joao%40email.com&naturalidadeCidade=S%C3%A3o%20Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some%20company&nomeReferencia1=some%20nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=1234567891011121314151622222222222&email=joao%40email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some%20company&nomeReferencia1=some%20nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9058,7 +9140,7 @@
 												},
 												{
 													"key": "numeroContaCorrente",
-													"value": "12345678910111213141516"
+													"value": "1234567891011121314151622222222222"
 												},
 												{
 													"key": "email",
@@ -9066,7 +9148,7 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "S%C3%A3o%20Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
@@ -9098,7 +9180,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01%3A30%3A00.000-05%3A00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -9205,7 +9287,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=S%C3%A3o%20Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111&nomeReferencia1=some%20nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr&nomeReferencia1=some%20nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9251,11 +9333,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "S%C3%A3o%20Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -9283,7 +9365,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01%3A30%3A00.000-05%3A00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -9295,7 +9377,7 @@
 												},
 												{
 													"key": "nomeEmpresa",
-													"value": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+													"value": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
 												},
 												{
 													"key": "nomeReferencia1",
@@ -9342,20 +9424,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"\r",
-													"   pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/type\");\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser um número\");\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"GET Status code is 400\", function () {\r",
-													"        pm.response.to.have.status(400);\r",
+													"    pm.test(\"GET Status code is 200\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
 													"    });\r",
 													"\r",
 													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.badRequest;\r",
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
@@ -9398,7 +9471,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=S%C3%A3o%20Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1s&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9444,11 +9517,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "S%C3%A3o%20Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -9476,7 +9549,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01%3A30%3A00.000-05%3A00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -9492,7 +9565,7 @@
 												},
 												{
 													"key": "nomeReferencia1",
-													"value": "some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1s"
+													"value": ""
 												},
 												{
 													"key": "enderecoReferencia1",
@@ -9520,7 +9593,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER055 - PUT: /api/pessoas-detalhes/Validação da tag naturalidadeCidade(-)",
+									"name": "PIER055 - PUT: /api/pessoas-detalhes/naturalidadeEstado_tam_>_2(-)",
 									"event": [
 										{
 											"listen": "prerequest",
@@ -9536,14 +9609,7 @@
 											"script": {
 												"exec": [
 													"\r",
-													"   pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/type\");\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser um número\");\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"GET Status code is 400\", function () {\r",
+													"       pm.test(\"GET Status code is 400\", function () {\r",
 													"        pm.response.to.have.status(400);\r",
 													"    });\r",
 													"\r",
@@ -9553,6 +9619,10 @@
 													"        pm.response.to.be.json;\r",
 													"    });\r",
 													"\r",
+													"  pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.error.message).be.equal(\"[string \\\"SPSSSSS\\\" is too long (length: 7, maximum allowed: 2)]\");\r",
+													"    });\r",
 													"\r",
 													"\r",
 													""
@@ -9591,7 +9661,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=Sao PauloSao PauloSao PauloSao PauloSao PauloSao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao%40email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SPSSSSS&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9637,11 +9707,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao PauloSao PauloSao PauloSao PauloSao PauloSao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SPSSSSS"
 												},
 												{
 													"key": "grauInstrucao",
@@ -10099,7 +10169,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER055 - PUT: /api/pessoas-detalhes/Validação da tag numeroDependentes(-)",
+									"name": "PIER055 - PUT: /api/pessoas-detalhes/numeroDependentes_tam_>_3(-)",
 									"event": [
 										{
 											"listen": "prerequest",
@@ -10170,7 +10240,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=Sao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=256&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jos%C3%A9%20da%20Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=256333&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10216,11 +10286,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -10248,11 +10318,11 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01%3A30%3A00.000-05%3A00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
-													"value": "256"
+													"value": "256333"
 												},
 												{
 													"key": "impedidoFinanciamento",
@@ -10308,13 +10378,7 @@
 											"script": {
 												"exec": [
 													"\r",
-													"   pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/type\");\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser um número\");\r",
-													"    });\r",
-													"\r",
+													"   \r",
 													"    pm.test(\"GET Status code is 400\", function () {\r",
 													"        pm.response.to.have.status(400);\r",
 													"    });\r",
@@ -10326,6 +10390,10 @@
 													"    });\r",
 													"\r",
 													"\r",
+													"   // implementar mensagem\r",
+													"   \r",
+													"//Nome do pai da pessoa física, de 1-\r",
+													"//100 caracteres (e.g. João daSilva\r",
 													"\r",
 													""
 												],
@@ -10363,7 +10431,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=Sao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01%3A30%3A00.000-05%3A00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJoseJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJoseJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10409,11 +10477,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -10421,7 +10489,7 @@
 												},
 												{
 													"key": "nomePai",
-													"value": "Jose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose"
+													"value": "Jose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJoseJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJoseJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose da SilvaJose"
 												},
 												{
 													"key": "numeroCnh",
@@ -10441,7 +10509,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01%3A30%3A00.000-05%3A00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -10500,20 +10568,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"\r",
-													"   pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/type\");\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser um número\");\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"GET Status code is 400\", function () {\r",
-													"        pm.response.to.have.status(400);\r",
+													"    pm.test(\"GET Status code is 200\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
 													"    });\r",
 													"\r",
 													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.badRequest;\r",
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
@@ -10556,7 +10615,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=Sao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=A&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10602,11 +10661,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -10618,7 +10677,7 @@
 												},
 												{
 													"key": "numeroCnh",
-													"value": "23143031556"
+													"value": "A"
 												},
 												{
 													"key": "pessoaPoliticamenteExposta",
@@ -10634,7 +10693,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01:30:00.000-05:00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -10694,13 +10753,6 @@
 											"script": {
 												"exec": [
 													"\r",
-													"   pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/type\");\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser um número\");\r",
-													"    });\r",
-													"\r",
 													"    pm.test(\"GET Status code is 400\", function () {\r",
 													"        pm.response.to.have.status(400);\r",
 													"    });\r",
@@ -10710,6 +10762,11 @@
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
+													"\r",
+													"    pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"[ECMA 262 regex \\\"^(\\\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$\\\" does not match input string \\\"aaaa\\\", format attribute \\\"date\\\" not supported]\");\r",
+													"});\r",
+													"\r",
 													"\r",
 													"\r",
 													"\r",
@@ -10749,7 +10806,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=Sao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=aaaa&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10795,11 +10852,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -10827,7 +10884,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31"
+													"value": "aaaa"
 												},
 												{
 													"key": "numeroDependentes",
@@ -11079,7 +11136,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=Sao Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598?nomeMae=Maria Silva&idEstadoCivil=1&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=12345&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Jose da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some%20enderecoReferencia1&nomeReferencia2=some%20nomeReferencia2&enderecoReferencia2=some%20enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -11125,11 +11182,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "Sao Paulo"
+													"value": "São Paulo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -11157,7 +11214,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01:30:00.000-05:00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
@@ -11714,7 +11771,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -11771,7 +11828,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -11799,7 +11856,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01:30:00.000-05:00"
+													"value": "2020-10-31"
 												},
 												{
 													"key": "numeroDependentes",
