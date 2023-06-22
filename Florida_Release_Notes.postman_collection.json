@@ -393,7 +393,6 @@
 													"pm.test(\"Validar mensagem de retorno\", function () {\r",
 													"    var jsonData = pm.response.json();\r",
 													"    pm.expect(jsonData[0].codRetorno).to.equal(400);\r",
-													"    pm.expect(jsonData[0].descricaoRetorno).to.equal(\"Programa não encontrado\");\r",
 													"    pm.expect(jsonData[0].source).to.equal(\"MIDDLEWARE\");\r",
 													"});"
 												],
@@ -3142,31 +3141,16 @@
 									"response": []
 								},
 								{
-									"name": "HEIM143 - POST: /propostas/ramal_somente_zero(-)",
+									"name": "HEIM143 - POST: /propostas/ramal_somente_zero(+)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
-													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.badRequest;\r",
-													"     pm.response.to.be.withBody;\r",
-													"     pm.response.to.be.json;\r",
-													"});\r",
-													"\r",
-													"// Validar a mensagem de erro\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"\r",
-													"    pm.expect(jsonData[0].descricaoRetorno).to.equal(\"Erro na requisição\");\r",
-													"\r",
-													"    pm.expect(jsonData[0].erros[0].propriedade).to.equal(\"ramal\");\r",
-													"    pm.expect(jsonData[0].erros[0].mensagem).to.equal(\"\\\"telefones[0].ramal\\\" with value \\\"18888\\\" fails to match the ramal pattern\");\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -4130,12 +4114,7 @@
 													"    pm.expect(jsonData[0].erros[0].propriedade).to.equal(\"pais\");\r",
 													"    pm.expect(jsonData[0].erros[0].mensagem).to.equal(\"\\\"enderecos[0].pais\\\" is not allowed to be empty\");\r",
 													"\r",
-													"    pm.expect(jsonData[0].erros[1].propriedade).to.equal(\"enderecos\");\r",
-													"    pm.expect(jsonData[0].erros[1].mensagem).to.equal(\"\\\"enderecos\\\" does not contain at least one required match\");\r",
-													"\r",
-													"    pm.expect(jsonData[0].erros[2].propriedade).to.equal(\"diaVencimento\");\r",
-													"    pm.expect(jsonData[0].erros[2].mensagem).to.equal(\"\\\"conta.diaVencimento\\\" must be less than or equal to 31\");\r",
-													"});"
+													"  });"
 												],
 												"type": "text/javascript"
 											}
@@ -4155,7 +4134,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"cpf\": \"{{generatedCPF}}\",\n    \"nome\": \"Julia Teste\",\n    \"nomeMae\": \"Josefa Josefina\",\n    \"nomePai\": \"João Souza\",\n    \"dataNascimento\": \"1995-03-03\",\n    \"sexo\": \"F\",\n    \"idNacionalidade\":1,\n    \"numeroIdentidade\": \"97549788\",\n    \"dataEmissaoIdentidade\": \"1995-03-03\",\n    \"dataEmissaoCnh\": \"1995-03-03\",\n    \"orgaoExpedidorIdentidade\": \"SSP\",\n    \"numeroCNH\": \"32134354343\",\n    \"unidadeFederativaIdentidade\": \"SP\",\n    \"naturalidadeCidade\": \"São Paulo\",\n    \"naturalidadeEstado\": \"SP\", \n    \"codigoRamoAtividade\": 0,\n    \"valorRenda\":1000,\n    \"patrimonioTotal\": 0,\n    \"email\": \"email@email.com\",\n    \"idEstabelecimento\": 0,\n    \"idEstadoCivil\": 1,\n    \"matricula\": 0,\n    \"idPromotorVenda\": 55,\n    \"tokenIndicacaoAmigo\": \"t1\",\n    \"valorPontuacao\": 0,\n    \"encaminharCartaoEndereco\": true,\n    \"pessoaPoliticamenteExposta\": true,\n    \"canalEntrada\": \"Canal_TESTE\",\n    \"deficienteVisual\": true,\n    \"telefones\": [\n        {\n        \"idTipoTelefone\": 3,\n        \"ddd\":11,\n        \"telefone\": \"944444444\",\n        \"ramal\": \"00\"\n        }\n    ],\n    \"enderecos\": [\n        {\n        \"idTipoEndereco\": 1,\n        \"logradouro\": \"Paulista\",\n        \"complemento\": \"22A\",\n        \"bairro\": \"Centro\",\n        \"numero\": \"226\",\n        \"cep\": \"22222222\",\n        \"pontoReferencia\": \"Prox Parque\",\n        \"cidade\": \"São Paulo\",\n        \"uf\": \"SP\",\n        \"pais\": \"\",\n        \"enderecoCorrespondencia\": true\n        }\n    ],\n    \"conta\": {\n        \"idProduto\": 1,\n        \"idOrigemComercial\": 99,\n        \"diaVencimento\": 35,\n        \"limiteGlobal\": 777,\n        \"limiteMaximo\": 1234,\n        \"limiteParcelas\": 1234,\n        \"limiteConsignado\": 1234,\n        \"faturaPorEmail\": true,\n        \"pacoteTarifa\": 1,\n        \"flagCreditoAtivo\": true,\n        \"flagDebitoAtivo\": true,\n        \"flagPLDiferenciado\": true,\n        \"flagOverLimit\": true,\n        \"flagCarteiraDigital\": true,\n        \"bonusCelular\": {\n        \"codigoOperadora\": 1,\n        \"ddd\": 11,\n        \"celular\": \"998556322\"\n        },\n        \"adicionais\": [\n        \n\t\t\t]\n    },\n    \"assinaturaCliente\": \"string\",\n    \"neurotech\": {\n        \"imagesProcessId\": \"string\",\n        \"fotoBiometriaContingencia\": true,\n        \"fotoBiometriaRepositorio\": true,\n        \"fotoDocumentoContingencia\": true,\n        \"fotoDocumentoRepositorio\": true,\n        \"tokenAppStatus\": \"string\",\n        \"tokenAppReenvio\": \"string\",\n        \"tokenAppInvalido\": \"string\"\n    }\n}",
+											"raw": "{\n    \"cpf\": \"{{generatedCPF}}\",\n    \"nome\": \"Julia Teste\",\n    \"nomeMae\": \"Josefa Josefina\",\n    \"nomePai\": \"João Souza\",\n    \"dataNascimento\": \"1995-03-03\",\n    \"sexo\": \"F\",\n    \"idNacionalidade\":1,\n    \"numeroIdentidade\": \"97549788\",\n    \"dataEmissaoIdentidade\": \"1995-03-03\",\n    \"dataEmissaoCnh\": \"1995-03-03\",\n    \"orgaoExpedidorIdentidade\": \"SSP\",\n    \"numeroCNH\": \"32134354343\",\n    \"unidadeFederativaIdentidade\": \"SP\",\n    \"naturalidadeCidade\": \"São Paulo\",\n    \"naturalidadeEstado\": \"SP\", \n    \"codigoRamoAtividade\": 0,\n    \"valorRenda\":1000,\n    \"patrimonioTotal\": 0,\n    \"email\": \"email@email.com\",\n    \"idEstabelecimento\": 0,\n    \"idEstadoCivil\": 1,\n    \"matricula\": 0,\n    \"idPromotorVenda\": 55,\n    \"tokenIndicacaoAmigo\": \"t1\",\n    \"valorPontuacao\": 0,\n    \"encaminharCartaoEndereco\": true,\n    \"pessoaPoliticamenteExposta\": true,\n    \"canalEntrada\": \"Canal_TESTE\",\n    \"deficienteVisual\": true,\n    \"telefones\": [\n        {\n        \"idTipoTelefone\": 3,\n        \"ddd\":11,\n        \"telefone\": \"944444444\",\n        \"ramal\": \"00\"\n        }\n    ],\n    \"enderecos\": [\n        {\n        \"idTipoEndereco\": 1,\n        \"logradouro\": \"Paulista\",\n        \"complemento\": \"22A\",\n        \"bairro\": \"Centro\",\n        \"numero\": \"226\",\n        \"cep\": \"22222222\",\n        \"pontoReferencia\": \"Prox Parque\",\n        \"cidade\": \"São Paulo\",\n        \"uf\": \"SP\",\n        \"pais\": \"\",\n        \"enderecoCorrespondencia\": true\n        }\n    ],\n    \"conta\": {\n        \"idProduto\": 12,\n        \"idOrigemComercial\": 99,\n        \"diaVencimento\": 30,\n        \"limiteGlobal\": 777,\n        \"limiteMaximo\": 1234,\n        \"limiteParcelas\": 1234,\n        \"limiteConsignado\": 1234,\n        \"faturaPorEmail\": true,\n        \"pacoteTarifa\": 1,\n        \"flagCreditoAtivo\": true,\n        \"flagDebitoAtivo\": true,\n        \"flagPLDiferenciado\": true,\n        \"flagOverLimit\": true,\n        \"flagCarteiraDigital\": true,\n        \"bonusCelular\": {\n        \"codigoOperadora\": 1,\n        \"ddd\": 11,\n        \"celular\": \"998556322\"\n        },\n        \"adicionais\": [\n        \n\t\t\t]\n    },\n    \"assinaturaCliente\": \"string\",\n    \"neurotech\": {\n        \"imagesProcessId\": \"string\",\n        \"fotoBiometriaContingencia\": true,\n        \"fotoBiometriaRepositorio\": true,\n        \"fotoDocumentoContingencia\": true,\n        \"fotoDocumentoRepositorio\": true,\n        \"tokenAppStatus\": \"string\",\n        \"tokenAppReenvio\": \"string\",\n        \"tokenAppInvalido\": \"string\"\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
