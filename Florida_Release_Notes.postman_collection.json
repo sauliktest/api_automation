@@ -9402,17 +9402,17 @@
 													"        pm.response.to.be.json;\r",
 													"    });\r",
 													"\r",
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
+													"pm.test(\"Valida a estrutura do corpo\", function () {\r",
 													"    const schema = pm.variables.get(\"schema\");\r",
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Validar que o campo id não pode ser vazio\", function () {\r",
+													"pm.test(\"Valida que o campo id não pode ser vazio\", function () {\r",
 													"       const resp = pm.response.json()\r",
 													"       pm.expect(resp.content[0].id).not.to.equal(\"\");  \r",
 													" });\r",
 													"\r",
-													"pm.test(\"Validar que o campo id não pode ser nulo\", function () {\r",
+													"pm.test(\"Valida que o campo id não pode ser nulo\", function () {\r",
 													"       const resp = pm.response.json()\r",
 													"       pm.expect(resp.content[0].id).not.equal(null);   \r",
 													"});\r",
@@ -16865,15 +16865,32 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"var jsonData = pm.response.json();\r",
+													"pm.globals.set(\"idConta\", jsonData.id);\r",
+													"console.log(pm.globals.get(\"idConta\"));\r",
+													"\r",
+													"\r",
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.ok;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
 													"\r",
-													"// msg"
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -17035,17 +17052,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"// Verifica se a mensagem de erro contém o texto desejado\r",
+													"pm.test(\"Verifica a mensagem de erro\", function () {\r",
+													"    pm.expect(pm.response.json().error.message).to.eql(\"O participante informado é inexistente.\");\r",
 													"});\r",
 													""
 												],
@@ -17219,7 +17238,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"O programa informado é inexistente\");\r",
 													"});\r",
 													""
 												],
@@ -17325,15 +17344,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -17379,15 +17402,20 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"A data de vencimento informada é inválida\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -17433,15 +17461,20 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"A data de vencimento informada é inválida\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -17487,15 +17520,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -17541,15 +17578,21 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"// Realizar as validações desejadas utilizando pm.test()\r",
-													"    pm.test(\"Validação produto Pernambucanas x Data Vencimento\", function () {\r",
-													"      const responseBody = pm.response.json();\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
+													"});\r",
 													"\r",
-													"      pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
-													"      pm.expect(responseBody.diaVencimento).to.eql(pm.variables.get(\"diaVencimento\"));\r",
+													"\r",
+													"\r",
+													"// Realizar as validações desejadas utilizando pm.test()\r",
+													"   // pm.test(\"Validação produto Pernambucanas x Data Vencimento\", function () {\r",
+													"   //   const responseBody = pm.response.json();\r",
+													"\r",
+													"   //   pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
+													"  //    pm.expect(responseBody.diaVencimento).to.eql(pm.variables.get(\"diaVencimento\"));\r",
 													"      \r",
 													"      // Adicione outras validações necessárias aqui\r",
-													"    });\r",
+													"  //  });\r",
 													"  "
 												],
 												"type": "text/javascript"
@@ -17629,6 +17672,10 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
 													"// Realizar as validações desejadas utilizando pm.test()\r",
 													"    pm.test(\"Validação do Produto Pefisa x Data Vencimento\", function () {\r",
 													"          \r",
@@ -17724,6 +17771,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"\r",
 													"// Realizar as validações desejadas utilizando pm.test()\r",
 													"    pm.test(\"Validação produto Palmeiras x Data Vencimento\", function () {\r",
 													"      const responseBody = pm.response.json();\r",
@@ -17812,15 +17864,20 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"// Realizar as validações desejadas utilizando pm.test()\r",
-													"    pm.test(\"Validação produto Urby x Data Vencimento\", function () {\r",
-													"      const responseBody = pm.response.json();\r",
+													"//pm.test(\"Status code is 200\", function () {\r",
+													"//    pm.response.to.have.status(200);\r",
+													"//});\r",
 													"\r",
-													"      pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
+													"\r",
+													"// Realizar as validações desejadas utilizando pm.test()\r",
+													"  //  pm.test(\"Validação produto Urby x Data Vencimento\", function () {\r",
+													"  //    const responseBody = pm.response.json();\r",
+													"\r",
+													"  //    pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
 													"      pm.expect(responseBody.diaVencimento).to.eql(pm.variables.get(\"diaVencimento\"));\r",
 													"      \r",
 													"      // Adicione outras validações necessárias aqui\r",
-													"    });\r",
+													"    //});\r",
 													"  "
 												],
 												"type": "text/javascript"
@@ -17900,15 +17957,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"// Realizar as validações desejadas utilizando pm.test()\r",
-													"    pm.test(\"Validação produto Topy x Data de Vencimento\", function () {\r",
-													"      const responseBody = pm.response.json();\r",
+													"//pm.test(\"Status code is 200\", function () {\r",
+													" //   pm.response.to.have.status(200);\r",
+													"//});\r",
 													"\r",
-													"      pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
-													"      pm.expect(responseBody.diaVencimento).to.eql(pm.variables.get(\"diaVencimento\"));\r",
+													"// Realizar as validações desejadas utilizando pm.test()\r",
+													" //   pm.test(\"Validação produto Topy x Data de Vencimento\", function () {\r",
+													" //     const responseBody = pm.response.json();\r",
+													"//\r",
+													"  //    pm.expect(responseBody.idProduto).to.eql(pm.variables.get(\"idProduto\"));\r",
+													"   //   pm.expect(responseBody.diaVencimento).to.eql(pm.variables.get(\"diaVencimento\"));\r",
 													"      \r",
 													"      // Adicione outras validações necessárias aqui\r",
-													"    });\r",
+													"   // });\r",
 													"  "
 												],
 												"type": "text/javascript"
@@ -17988,6 +18049,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"\r",
 													"// Realizar as validações desejadas utilizando pm.test()\r",
 													"    pm.test(\"Validação produto Carmen Steffens x Data de Vencimento\", function () {\r",
 													"      const responseBody = pm.response.json();\r",
@@ -18070,21 +18136,30 @@
 									"response": []
 								},
 								{
-									"name": "PIER097 - POST: /api/contas_diaVencimento_produto_Copy",
+									"name": "PIER097 - POST: /api/contas_produto_#_data_vencimento(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"// Verifica o valor do campo \"errorCode\"\r",
+													"pm.test(\"Verifica o valor do campo errorCode\", function () {\r",
+													"    pm.expect(pm.response.json().error.errorCode).to.eql(\"2001\");\r",
+													"    pm.expect(pm.response.json().error.message).to.eql(\"A data de vencimento informada é inválida\");\r",
+													"    pm.expect(pm.response.json().error.errors[0].message).to.eql(\"dueDateId não existe, não pertencente ao programa ou está inativo\");\r",
+													"    pm.expect(pm.response.json().error.errors[0].code).to.eql(\"1\");\r",
+													"});\r",
+													"\r",
 													""
 												],
 												"type": "text/javascript"
@@ -18096,7 +18171,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\":12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 12,\n    \"limiteGlobal\": 0,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -18131,15 +18206,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18185,15 +18264,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18243,11 +18326,7 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
-													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18258,7 +18337,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 12,\n    \"limiteGlobal\": 0,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 0,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -18293,15 +18372,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18347,15 +18430,19 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"O limite informado está acima do permitido\");\r",
+													"});\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -18401,15 +18488,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18671,15 +18761,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18725,15 +18818,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18779,15 +18875,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18833,15 +18932,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18887,15 +18989,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -18995,15 +19100,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -19014,7 +19122,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":500,\n    \"valorRenda\": 200,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"teste\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\":9\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":500,\n    \"valorRenda\": 200,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"teste\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\":A\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -19037,41 +19145,6 @@
 													"key": "idPessoa",
 													"value": "1298"
 												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "PIER110 - POST : /api/contas/${idConta}/reativar",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [],
-										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/2027880/reativar",
-											"protocol": "https",
-											"host": [
-												"{{integrationURL}}"
-											],
-											"path": [
-												"contas",
-												"api",
-												"contas",
-												"2027880",
-												"reativar"
 											]
 										}
 									},
@@ -19122,6 +19195,41 @@
 													"key": "id_status",
 													"value": "2"
 												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER110 - POST : /api/contas/${idConta}/reativar",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas/2027880/reativar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas",
+												"2027880",
+												"reativar"
 											]
 										}
 									},
@@ -19201,7 +19309,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/dados-bancarios-conta?id=20022000&idConta=22&idTipoContaBancaria=4",
+											"raw": "https://{{integrationURL}}/contas/api/dados-bancarios-conta?idConta=70000849",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -19214,19 +19322,75 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "20022000"
+													"value": "1298",
+													"disabled": true
 												},
 												{
 													"key": "idConta",
-													"value": "22"
+													"value": "70000849"
 												},
 												{
 													"key": "idTipoContaBancaria",
-													"value": "4"
+													"value": "4",
+													"disabled": true
 												}
 											]
 										},
 										"description": "Lambda: **lmb-int-contas**"
+									},
+									"response": []
+								},
+								{
+									"name": "PIER048 - /pier/v2/api/contas/{id}_listar_contas_via_id(+)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"})\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.ok;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"var jsonData = pm.response.json();\r",
+													"var idResponse = jsonData.id;\r",
+													"var idConta = pm.globals.get(\"idConta\");\r",
+													"\r",
+													"pm.test(\"Valida se o N. da conta listada é o mesmo da conta criada\", function() {\r",
+													"    pm.expect(idResponse).to.eql(idConta);\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas_consultas/pier/v2/api/contas/{{idConta}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas_consultas",
+												"pier",
+												"v2",
+												"api",
+												"contas",
+												"{{idConta}}"
+											]
+										}
 									},
 									"response": []
 								},
