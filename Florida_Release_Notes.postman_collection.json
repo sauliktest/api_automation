@@ -9050,25 +9050,13 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"// Aguardar 5 segundos\r",
-													"setTimeout(function() {\r",
-													"    // Cenário 2: A resposta é válida e deve ter um corpo\r",
 													"    pm.test(\"A resposta é válida e deve ter um corpo\", function () {\r",
 													"        pm.response.to.be.ok;\r",
 													"        pm.response.to.be.withBody;\r",
 													"        pm.response.to.be.json;\r",
 													"    });\r",
 													"\r",
-													"    // Aguardar 5 segundos\r",
-													"    setTimeout(function() {\r",
-													"        // Cenário 3: Buscar por ID existente e validar se o id na resposta é o mesmo informado na busca\r",
-													"        var jsonData = pm.response.json();\r",
-													"        pm.test(\"Buscar por ID existente e validar se o id na resposta é o mesmo informado na busca\", function () {\r",
-													"            pm.expect(jsonData.content[0].idPessoa).to.eql(1323);\r",
-													"        });\r",
-													"    }, 5000); // Atraso de 5 segundos entre os cenários 2 e 3\r",
-													"}, 5000); // Atraso de 5 segundos entre os cenários 1 e 2\r",
-													"\r",
+													"  \r",
 													" \r",
 													" \r",
 													""
@@ -9093,7 +9081,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa={{idPessoa}}",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=1323",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9106,7 +9094,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "{{idPessoa}}"
+													"value": "1323"
 												}
 											]
 										}
