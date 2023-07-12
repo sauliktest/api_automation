@@ -14673,9 +14673,14 @@
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"O participante informado é inexistente.\");\r",
+													"pm.test(\"Validar mensagens de erro\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"   // pm.expect(jsonData.error.errorCode).to.equal(\"0009\");\r",
+													"    pm.expect(jsonData.error.message).to.equal(\"O participante informado é inexistente\");\r",
+													" \r",
+													"    \r",
 													"});\r",
+													"\r",
 													""
 												],
 												"type": "text/javascript"
@@ -14695,7 +14700,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1333",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14708,7 +14713,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "1333"
 												}
 											]
 										}
@@ -15188,8 +15193,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"\r",
@@ -16291,15 +16296,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -16345,15 +16353,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -16364,7 +16375,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": Letras,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 00000000,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -16399,15 +16410,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"O limite informado está acima do permitido\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -16418,7 +16432,64 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 5988888888,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 5988,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "1298"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER097 - POST: /api/contas_limteMaximo_>_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\":,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -16453,15 +16524,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													"//schema\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
 													"\r",
-													"//corpo\r",
-													"\r",
-													"// msg"
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -16586,7 +16660,64 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":500,\n    \"valorRenda\": 00000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":00000000,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "1298"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER097 - POST: /api/contas_limiteParcelas_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -16902,6 +17033,121 @@
 									"response": []
 								},
 								{
+									"name": "PIER097 - POST: /api/contas_valorRenda_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
+													"});\r",
+													"\r",
+													"//schema\r",
+													"const schema = {\r",
+													"   \r",
+													"    \"type\": \"object\",\r",
+													"    \"default\": {},\r",
+													"    \"title\": \"Root Schema\",\r",
+													"    \"required\": [\r",
+													"        \"error\"\r",
+													"    ],\r",
+													"    \"properties\": {\r",
+													"        \"error\": {\r",
+													"            \"type\": \"object\",\r",
+													"            \"default\": {},\r",
+													"            \"title\": \"The error Schema\",\r",
+													"            \"required\": [\r",
+													"                \"errorCode\",\r",
+													"                \"message\"\r",
+													"            ],\r",
+													"            \"properties\": {\r",
+													"                \"errorCode\": {\r",
+													"                    \"type\": \"string\",\r",
+													"                    \"default\": \"\",\r",
+													"                    \"title\": \"The errorCode Schema\",\r",
+													"                    \"examples\": [\r",
+													"                        \"400\"\r",
+													"                    ]\r",
+													"                },\r",
+													"                \"message\": {\r",
+													"                    \"type\": \"string\",\r",
+													"                    \"default\": \"\",\r",
+													"                    \"title\": \"The message Schema\",\r",
+													"                    \"examples\": [\r",
+													"                        \"[remainder of division is not zero (1.66667 / 1.0E-4), format attribute \\\"float\\\" not supported]\"\r",
+													"                    ]\r",
+													"                }\r",
+													"            },\r",
+													"            \"examples\": [{\r",
+													"                \"errorCode\": \"400\",\r",
+													"                \"message\": \"[remainder of division is not zero (1.66667 / 1.0E-4), format attribute \\\"float\\\" not supported]\"\r",
+													"            }]\r",
+													"        }\r",
+													"    },\r",
+													"    \"examples\": [{\r",
+													"        \"error\": {\r",
+													"            \"errorCode\": \"400\",\r",
+													"            \"message\": \"[remainder of division is not zero (1.66667 / 1.0E-4), format attribute \\\"float\\\" not supported]\"\r",
+													"        }\r",
+													"    }]\r",
+													"}\r",
+													"\r",
+													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
+													"    pm.response.to.have.jsonSchema(schema);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"//corpo\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"// msg\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 123,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":500,\n    \"valorRenda\": ,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "1298"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER097 - POST: /api/contas_idEnderecoCorrespondencia_letras(-)",
 									"event": [
 										{
@@ -16959,14 +17205,71 @@
 									"response": []
 								},
 								{
+									"name": "PIER097 - POST: /api/contas_idEnderecoCorrespondencia_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 12345,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\":500,\n    \"valorRenda\": 200,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"teste\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\":\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "1298"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER102 - POST - /api/contas/{id}/bloquear",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -17015,8 +17318,49 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas/2027880/reativar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas",
+												"2027880",
+												"reativar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER110 - POST : /api/contas/${idConta}/reativar_conta_inexistente(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"A conta informada é inexistente\");\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -17050,8 +17394,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -17094,8 +17438,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
 													"});"
 												],
 												"type": "text/javascript"
