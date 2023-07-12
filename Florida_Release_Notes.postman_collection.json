@@ -10205,9 +10205,7 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -11005,13 +11003,13 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7174 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -11034,7 +11032,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=999999&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=344&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -11071,7 +11069,7 @@
 												},
 												{
 													"key": "numeroBanco",
-													"value": "999999"
+													"value": "344"
 												},
 												{
 													"key": "numeroAgencia",
@@ -11177,6 +11175,7 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"\r",
 													"pm.test(\"Status code is 400\", function () {\r",
 													"    pm.response.to.have.status(400);\r",
 													"});\r",
@@ -11188,7 +11187,6 @@
 													"\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -11416,25 +11414,14 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7219 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroAgencia/maximum\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(99999);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser <= 99999\");\r",
-													"});\r",
 													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -11447,67 +11434,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"comparison\": {\r",
-													"                    \"type\": \"string\"\r",
-													"                  },\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"comparison\",\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -11901,17 +11828,14 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7345 rejeitado pelo DEV\r",
 													"\r",
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.ok\r",
+													"\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -11924,62 +11848,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -11989,7 +11858,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=1234567891234567&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=123456789123456799999999&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -12034,7 +11903,7 @@
 												},
 												{
 													"key": "numeroContaCorrente",
-													"value": "1234567891234567"
+													"value": "123456789123456799999999"
 												},
 												{
 													"key": "email",
@@ -12046,7 +11915,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -12132,14 +12001,13 @@
 											"listen": "test",
 											"script": {
 												"exec": [
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7346 rejeitado pelo DEV\r",
 													"\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -12305,26 +12173,15 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7347 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/nomeEmpresa/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(100);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 100 caracteres\");\r",
 													"\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
+													"    \r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -12337,63 +12194,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -12403,7 +12204,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company some companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company some companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome companysome company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -12460,7 +12261,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -12546,26 +12347,14 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7348 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/nomeReferencia1/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(80);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 80 caracteres\");\r",
-													"\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
+													"    \r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -12578,63 +12367,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -12644,7 +12377,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1 some nomeReferencia1 some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1 some nomeReferencia1 some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -12701,7 +12434,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -12787,28 +12520,23 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/naturalidadeCidade/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(100);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 100 caracteres\");\r",
-													"});\r",
 													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 422\", function () {\r",
+													"    pm.response.to.have.status(422);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"city informado não respeita o domínio ou não pertence ao state informado/cadastrado\");\r",
+													"});\r",
+													"\r",
+													"\r",
 													""
 												],
 												"type": "text/javascript"
@@ -12818,63 +12546,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -12884,7 +12556,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Pauloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -12937,11 +12609,11 @@
 												},
 												{
 													"key": "naturalidadeCidade",
-													"value": "São PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão PauloSão Paulo"
+													"value": "São Pauloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -13255,31 +12927,19 @@
 									"response": []
 								},
 								{
-									"name": "PIER134 - POST: /api/pessoas-detalhes/ numeroDependentes_>_3(-)",
+									"name": "PIER134 - POST: /api/pessoas-detalhes/ numeroDependentes_>_255(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7356 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroDependentes/maximum\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(255);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"deve ser <= 255\");\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -13292,63 +12952,7 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"error\": {\r",
-													"      \"type\": \"object\",\r",
-													"      \"properties\": {\r",
-													"        \"errorCode\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"message\": {\r",
-													"          \"type\": \"string\"\r",
-													"        },\r",
-													"        \"errors\": {\r",
-													"          \"type\": \"array\",\r",
-													"          \"items\": {\r",
-													"            \"type\": \"object\",\r",
-													"            \"properties\": {\r",
-													"              \"schemaPath\": {\r",
-													"                \"type\": \"string\"\r",
-													"              },\r",
-													"              \"params\": {\r",
-													"                \"type\": \"object\",\r",
-													"                \"properties\": {\r",
-													"                  \"limit\": {\r",
-													"                    \"type\": \"number\"\r",
-													"                  }\r",
-													"                },\r",
-													"                \"required\": [\r",
-													"                  \"limit\"\r",
-													"                ]\r",
-													"              },\r",
-													"              \"message\": {\r",
-													"                \"type\": \"string\"\r",
-													"              }\r",
-													"            },\r",
-													"            \"required\": [\r",
-													"              \"schemaPath\",\r",
-													"              \"params\",\r",
-													"              \"message\"\r",
-													"            ]\r",
-													"          }\r",
-													"        }\r",
-													"      },\r",
-													"      \"required\": [\r",
-													"        \"errorCode\",\r",
-													"        \"message\",\r",
-													"        \"errors\"\r",
-													"      ]\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"error\"\r",
-													"  ]\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -13358,7 +12962,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2567&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=257&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -13415,7 +13019,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -13447,7 +13051,7 @@
 												},
 												{
 													"key": "numeroDependentes",
-													"value": "2567"
+													"value": "257"
 												},
 												{
 													"key": "impedidoFinanciamento",
@@ -13501,25 +13105,13 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7357 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/nomePai/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(80);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 80 caracteres\");\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -13598,7 +13190,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da Si&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -13655,7 +13247,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -13663,7 +13255,7 @@
 												},
 												{
 													"key": "nomePai",
-													"value": "Pai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da SilvaPai da Si"
+													"value": "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
 												},
 												{
 													"key": "numeroCnh",
@@ -13741,25 +13333,15 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7359 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroCnh/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(15);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 15 caracteres\");\r",
-													"});\r",
 													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
+													"   \r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -13838,7 +13420,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=2314303155611111&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=AAAAAAAAAA&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -13895,7 +13477,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -13907,7 +13489,7 @@
 												},
 												{
 													"key": "numeroCnh",
-													"value": "2314303155611111"
+													"value": "AAAAAAAAAA"
 												},
 												{
 													"key": "pessoaPoliticamenteExposta",
@@ -13975,31 +13557,20 @@
 									"response": []
 								},
 								{
-									"name": "PIER134 - POST: /api/pessoas-detalhes/ dataEmissaoCnh_>_15_caracteres(-)",
+									"name": "PIER134 - POST: /api/pessoas-detalhes/ numeroCnh_letras(-)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"});\r",
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7360 rejeitado pelo DEV\r",
 													"\r",
-													"pm.test(\"Validar as mensagem apresentadas no response\", function () {\r",
-													"    var jsonData = pm.response.json();\r",
-													"    pm.expect(jsonData.error.message).be.equal(\"Erro ao validar os dados de entrada.\");\r",
-													"    pm.expect(jsonData.error.errors[0].schemaPath).be.equal(\"#/properties/numeroCnh/maxLength\");\r",
-													"    pm.expect(jsonData.error.errors[0].params.limit).be.equal(15);\r",
-													"    pm.expect(jsonData.error.errors[0].message).be.equal(\"não deve ser maior que 15 caracteres\");\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Status code is 400\", function () {\r",
-													"    pm.response.to.have.status(400);\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.badRequest;\r",
+													"   \r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
@@ -14078,7 +13649,236 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=1&idNaturezaOcupacao=9&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=DF&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=aaaaaaaaaa&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"pessoas-detalhes",
+												"api",
+												"pessoas-detalhes"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "1497"
+												},
+												{
+													"key": "nomeMae",
+													"value": "Mae SilvaMae"
+												},
+												{
+													"key": "idEstadoCivil",
+													"value": "1"
+												},
+												{
+													"key": "idProfissao",
+													"value": "Engenheiro"
+												},
+												{
+													"key": "idNaturezaOcupacao",
+													"value": "9876987"
+												},
+												{
+													"key": "idNacionalidade",
+													"value": "76"
+												},
+												{
+													"key": "numeroBanco",
+													"value": "12345"
+												},
+												{
+													"key": "numeroAgencia",
+													"value": "12349"
+												},
+												{
+													"key": "numeroContaCorrente",
+													"value": "123456789"
+												},
+												{
+													"key": "email",
+													"value": "massa@email.com"
+												},
+												{
+													"key": "naturalidadeCidade",
+													"value": "São Paulo"
+												},
+												{
+													"key": "naturalidadeEstado",
+													"value": "SP"
+												},
+												{
+													"key": "grauInstrucao",
+													"value": "1"
+												},
+												{
+													"key": "nomePai",
+													"value": "Pai da Silva"
+												},
+												{
+													"key": "numeroCnh",
+													"value": "aaaaaaaaaa"
+												},
+												{
+													"key": "pessoaPoliticamenteExposta",
+													"value": "false"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "666"
+												},
+												{
+													"key": "flagSemEnderecoComercialFixo",
+													"value": "false"
+												},
+												{
+													"key": "dataEmissaoCnh",
+													"value": "2020-10-31T01:30:00.000-05:00"
+												},
+												{
+													"key": "numeroDependentes",
+													"value": "255"
+												},
+												{
+													"key": "impedidoFinanciamento",
+													"value": "false"
+												},
+												{
+													"key": "nomeEmpresa",
+													"value": "some company"
+												},
+												{
+													"key": "nomeReferencia1",
+													"value": "some nomeReferencia1"
+												},
+												{
+													"key": "enderecoReferencia1",
+													"value": "some enderecoReferencia1"
+												},
+												{
+													"key": "nomeReferencia2",
+													"value": "some nomeReferencia2"
+												},
+												{
+													"key": "enderecoReferencia2",
+													"value": "some enderecoReferencia2"
+												},
+												{
+													"key": "chequeEspecial",
+													"value": "0"
+												},
+												{
+													"key": "flagNomePaiNaoInformado",
+													"value": "false"
+												},
+												{
+													"key": "salario",
+													"value": "2200"
+												},
+												{
+													"key": "patrimonioTotal",
+													"value": "100000"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER134 - POST: /api/pessoas-detalhes/ dataEmissaoCnh_formato_invalido(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//https://viverebrasil.atlassian.net/browse/FLOR-7361 em analise pelo DEV\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"   \r",
+													"    pm.response.to.be.withBody;\r",
+													"    pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.variables.set(\"schema\",\r",
+													"{\r",
+													"\r",
+													"  \"title\": \"Generated schema for Root\",\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"error\": {\r",
+													"      \"type\": \"object\",\r",
+													"      \"properties\": {\r",
+													"        \"errorCode\": {\r",
+													"          \"type\": \"string\"\r",
+													"        },\r",
+													"        \"message\": {\r",
+													"          \"type\": \"string\"\r",
+													"        },\r",
+													"        \"errors\": {\r",
+													"          \"type\": \"array\",\r",
+													"          \"items\": {\r",
+													"            \"type\": \"object\",\r",
+													"            \"properties\": {\r",
+													"              \"schemaPath\": {\r",
+													"                \"type\": \"string\"\r",
+													"              },\r",
+													"              \"params\": {\r",
+													"                \"type\": \"object\",\r",
+													"                \"properties\": {\r",
+													"                  \"limit\": {\r",
+													"                    \"type\": \"number\"\r",
+													"                  }\r",
+													"                },\r",
+													"                \"required\": [\r",
+													"                  \"limit\"\r",
+													"                ]\r",
+													"              },\r",
+													"              \"message\": {\r",
+													"                \"type\": \"string\"\r",
+													"              }\r",
+													"            },\r",
+													"            \"required\": [\r",
+													"              \"schemaPath\",\r",
+													"              \"params\",\r",
+													"              \"message\"\r",
+													"            ]\r",
+													"          }\r",
+													"        }\r",
+													"      },\r",
+													"      \"required\": [\r",
+													"        \"errorCode\",\r",
+													"        \"message\",\r",
+													"        \"errors\"\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"error\"\r",
+													"  ]\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=1&idNaturezaOcupacao=9&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=05:00-10-31T01:30:00.000-4567&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14135,7 +13935,7 @@
 												},
 												{
 													"key": "naturalidadeEstado",
-													"value": "DF"
+													"value": "SP"
 												},
 												{
 													"key": "grauInstrucao",
@@ -14163,7 +13963,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01:30:00.000-05:00"
+													"value": "05:00-10-31T01:30:00.000-4567"
 												},
 												{
 													"key": "numeroDependentes",
@@ -14662,7 +14462,7 @@
 										"method": "PUT",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/15?nomeMae=Maria Silva&idEstadoCivil=1&idProfissao=engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=joao@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=José da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/70000844?idEstadoCivil=1&idNacionalidade=76&grauInstrucao=1&pessoaPoliticamenteExposta=false&flagSemEnderecoComercialFixo=false&impedidoFinanciamento=false&chequeEspecial=0&flagNomePaiNaoInformado=false&nomeMae=Mae%20teste&idProfissao=1&idNaturezaOcupacao=1&naturalidadeCidade=Curitiba&naturalidadeEstado=PR&numeroDependentes=0&nomePai=Pai%20teste&numeroCnh=123456&usuarioAlteracao=AlteracaoUser&dataEmissaoCnh=2023-01-01",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14671,108 +14471,32 @@
 												"pessoas-detalhes",
 												"api",
 												"pessoas-detalhes",
-												"15"
+												"70000844"
 											],
 											"query": [
 												{
-													"key": "nomeMae",
-													"value": "Maria Silva"
-												},
-												{
 													"key": "idEstadoCivil",
 													"value": "1"
-												},
-												{
-													"key": "idProfissao",
-													"value": "engenheiro"
-												},
-												{
-													"key": "idNaturezaOcupacao",
-													"value": "9876987"
 												},
 												{
 													"key": "idNacionalidade",
 													"value": "76"
 												},
 												{
-													"key": "numeroBanco",
-													"value": "12345"
-												},
-												{
-													"key": "numeroAgencia",
-													"value": "12349"
-												},
-												{
-													"key": "numeroContaCorrente",
-													"value": "123456789"
-												},
-												{
-													"key": "email",
-													"value": "joao@email.com"
-												},
-												{
-													"key": "naturalidadeCidade",
-													"value": "São Paulo"
-												},
-												{
-													"key": "naturalidadeEstado",
-													"value": "SP"
-												},
-												{
 													"key": "grauInstrucao",
 													"value": "1"
-												},
-												{
-													"key": "nomePai",
-													"value": "José da Silva"
-												},
-												{
-													"key": "numeroCnh",
-													"value": "23143031556"
 												},
 												{
 													"key": "pessoaPoliticamenteExposta",
 													"value": "false"
 												},
 												{
-													"key": "usuarioAlteracao",
-													"value": "666"
-												},
-												{
 													"key": "flagSemEnderecoComercialFixo",
 													"value": "false"
 												},
 												{
-													"key": "dataEmissaoCnh",
-													"value": "2020-10-31T01:30:00.000-05:00"
-												},
-												{
-													"key": "numeroDependentes",
-													"value": "2"
-												},
-												{
 													"key": "impedidoFinanciamento",
 													"value": "false"
-												},
-												{
-													"key": "nomeEmpresa",
-													"value": "some company"
-												},
-												{
-													"key": "nomeReferencia1",
-													"value": "some nomeReferencia1"
-												},
-												{
-													"key": "enderecoReferencia1",
-													"value": "some enderecoReferencia1"
-												},
-												{
-													"key": "nomeReferencia2",
-													"value": "some nomeReferencia2"
-												},
-												{
-													"key": "enderecoReferencia2",
-													"value": "some enderecoReferencia2"
 												},
 												{
 													"key": "chequeEspecial",
@@ -14781,6 +14505,46 @@
 												{
 													"key": "flagNomePaiNaoInformado",
 													"value": "false"
+												},
+												{
+													"key": "nomeMae",
+													"value": "Mae%20teste"
+												},
+												{
+													"key": "idProfissao",
+													"value": "1"
+												},
+												{
+													"key": "idNaturezaOcupacao",
+													"value": "1"
+												},
+												{
+													"key": "naturalidadeCidade",
+													"value": "Curitiba"
+												},
+												{
+													"key": "naturalidadeEstado",
+													"value": "PR"
+												},
+												{
+													"key": "numeroDependentes",
+													"value": "0"
+												},
+												{
+													"key": "nomePai",
+													"value": "Pai%20teste"
+												},
+												{
+													"key": "numeroCnh",
+													"value": "123456"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "AlteracaoUser"
+												},
+												{
+													"key": "dataEmissaoCnh",
+													"value": "2023-01-01"
 												}
 											]
 										}
@@ -17699,12 +17463,20 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"\r",
-													"//console.log(\"CPF gerado: \" + generatedCPF);"
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.badRequest;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"já existe usuário na base com o documentNumber informado\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -17715,7 +17487,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"06514795947\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 97,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"80080784054\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 97,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -17768,7 +17540,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"JoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"80080784054\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 70000739,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"JoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"06514795846\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 70000739,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -20987,6 +20759,23 @@
 					"item": [
 						{
 							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//para gerar o cartão executar o endpoint:https://{{integrationURL}}/contas/api/contas?idPessoa=1298 e capturar o id gerado no request e passar como argumento neste endpoint. A var \"idConta\" esta armazendo o id gerado no endpoint acima.\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -21000,7 +20789,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/70001890/pessoas/1497/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/1497/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21009,7 +20798,7 @@
 										"contas",
 										"api",
 										"contas",
-										"70001890",
+										"{{idConta}}",
 										"pessoas",
 										"1497",
 										"gerar-cartao"
@@ -21075,12 +20864,355 @@
 							"response": []
 						},
 						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_sem_id(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"message\", \"Missing Authentication Token\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/pessoas/1497/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"pessoas",
+										"1497",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_letra_id(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"message\", \"Missing Authentication Token\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/pessoas/uuuaaaa/1497/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"pessoas",
+										"uuuaaaa",
+										"1497",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_id_inexistente(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"message\", \"Missing Authentication Token\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/pessoas/00000000/1497/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"pessoas",
+										"00000000",
+										"1497",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_sem_idPessoa(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"message\", \"Missing Authentication Token\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas//gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"{{idConta}}",
+										"pessoas",
+										"",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_idPessoa_letra(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.badRequest;\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/wweerrr/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"{{idConta}}",
+										"pessoas",
+										"wweerrr",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao_idPessoa_inexistente(-)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.badRequest;\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar mensagem de erro\", function () {\r",
+											"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/0000/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"{{idConta}}",
+										"pessoas",
+										"0000",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "PIER075 - /api/cartoes/{id}/bloquear",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "https://{{integrationURL}}/cartoes-manutencao/api/cartoes/70000430/bloquear?id_status=2&observacao=\"testing\"",
+									"raw": "https://{{integrationURL}}/cartoes-manutencao/api/cartoes/70000973/bloquear?id_status=0&observacao=\"testing\"",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21089,13 +21221,13 @@
 										"cartoes-manutencao",
 										"api",
 										"cartoes",
-										"70000430",
+										"70000973",
 										"bloquear"
 									],
 									"query": [
 										{
 											"key": "id_status",
-											"value": "2"
+											"value": "0"
 										},
 										{
 											"key": "observacao",
