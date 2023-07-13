@@ -7303,6 +7303,99 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "PIER119 - PUT /api/enderecos",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "https://kong-psd-hml-gke.pernambucanas.com.br/accenture/out/ci/test/enderecos/api/enderecos?idPessoa=70000844&idTipoEndereco=1&cep=01500005&logradouro=Avenida%20Paulista&numero=1501&complemento=Apto%20100&pontoReferencia=Em%20frente%20ao%20posto%20de%20gasolina&bairro=Bela%20Vista&cidade=S%C3%A3o%20Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=AGuiar&id=3387",
+											"protocol": "https",
+											"host": [
+												"kong-psd-hml-gke",
+												"pernambucanas",
+												"com",
+												"br"
+											],
+											"path": [
+												"accenture",
+												"out",
+												"ci",
+												"test",
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "70000844"
+												},
+												{
+													"key": "idTipoEndereco",
+													"value": "1"
+												},
+												{
+													"key": "cep",
+													"value": "01500005"
+												},
+												{
+													"key": "logradouro",
+													"value": "Avenida%20Paulista"
+												},
+												{
+													"key": "numero",
+													"value": "1501"
+												},
+												{
+													"key": "complemento",
+													"value": "Apto%20100"
+												},
+												{
+													"key": "pontoReferencia",
+													"value": "Em%20frente%20ao%20posto%20de%20gasolina"
+												},
+												{
+													"key": "bairro",
+													"value": "Bela%20Vista"
+												},
+												{
+													"key": "cidade",
+													"value": "S%C3%A3o%20Paulo"
+												},
+												{
+													"key": "uf",
+													"value": "SP"
+												},
+												{
+													"key": "pais",
+													"value": "Brasil"
+												},
+												{
+													"key": "tempoResidenciaAnos",
+													"value": "2"
+												},
+												{
+													"key": "tempoResidenciaMeses",
+													"value": "8"
+												},
+												{
+													"key": "aplicativoAlteracao",
+													"value": "string"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "AGuiar"
+												},
+												{
+													"key": "id",
+													"value": "3387"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -8952,6 +9045,79 @@
 									"response": []
 								},
 								{
+									"name": "PIER139 - PUT /api/telefones",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=70000844&ddd=11&telefone=991882511&ramal=10&id=6674",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "70000844"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "991882511"
+												},
+												{
+													"key": "ramal",
+													"value": "10"
+												},
+												{
+													"key": "id",
+													"value": "6674"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Pier132 - GET:/api/pessoas/{id}/historico-telefones N/A",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "incap_ses_1354_2842573=B0eCFMpR2SO9VJTIjWDKElmxeGQAAAAAa24DNkRMcQl7vqTNxddZDQ==; incap_ses_1452_2842573=ur7nRCPa8TdnC0H/yYomFO33d2QAAAAAotkyJghJVrOOkog5itM2rQ==; nlbi_2842573=/1UuY+ikyxatXQMFxcIi6gAAAAC+4+LESALKv+LQHug7irT4; visid_incap_2842573=OJnrMLxXSuu4WJzezUt89GIVUWQAAAAAQUIPAAAAAABAmXfPPG8q86a0RGPVtHnX"
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/pessoas/70000960/historico-telefones",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"pessoas",
+												"70000960",
+												"historico-telefones"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER137 - GET: /api/telefones_id_pessoa_existente(+)",
 									"event": [
 										{
@@ -9489,6 +9655,44 @@
 						{
 							"name": "Pessoas",
 							"item": [
+								{
+									"name": "HEIM010 - GET:/api/atendimentos/pessoas /v3",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/pessoas/api/atendimentos/pessoas/v3?cpf=54087915050",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"pessoas",
+												"api",
+												"atendimentos",
+												"pessoas",
+												"v3"
+											],
+											"query": [
+												{
+													"key": "cpf",
+													"value": "54087915050"
+												},
+												{
+													"key": "nome",
+													"value": "Jos%C3%A9%20Lima%20da%20Silva",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
 								{
 									"name": "PIER054 - GET: /api/pessoas/cpf_inexistente(-)",
 									"event": [
@@ -10139,6 +10343,46 @@
 												"pessoas",
 												"123",
 												"detalhes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "HEIM020 - Atualizar Nome Impresso",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "apikey",
+												"value": "TGoGobRgn3lHBpYeLdL66EXiDjFM82EZ",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nomeImpresso\":\"Joao Pedro da Silva\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/contas/api/contas/{id}/pessoas/{idPessoa}/portadores/v2",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas",
+												"api",
+												"contas",
+												"{id}",
+												"pessoas",
+												"{idPessoa}",
+												"portadores",
+												"v2"
 											]
 										}
 									},
@@ -17432,6 +17676,60 @@
 									"response": []
 								},
 								{
+									"name": "PIER048 - /pier/v2/api/contas/{id}_listar_contas_via_id(+)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"})\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.ok;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"var jsonData = pm.response.json();\r",
+													"var idResponse = jsonData.id;\r",
+													"var idConta = pm.globals.get(\"idConta\");\r",
+													"\r",
+													"pm.test(\"Valida se o N. da conta listada é o mesmo da conta criada\", function() {\r",
+													"    pm.expect(idResponse).to.eql(idConta);\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas_consultas/pier/v2/api/contas/{{idConta}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas_consultas",
+												"pier",
+												"v2",
+												"api",
+												"contas",
+												"{{idConta}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER050 - GET: /api/dados-bancarios-conta",
 									"event": [
 										{
@@ -17489,60 +17787,6 @@
 											]
 										},
 										"description": "Lambda: **lmb-int-contas**"
-									},
-									"response": []
-								},
-								{
-									"name": "PIER048 - /pier/v2/api/contas/{id}_listar_contas_via_id(+)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"})\r",
-													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"     pm.response.to.be.ok;\r",
-													"     pm.response.to.be.withBody;\r",
-													"     pm.response.to.be.json;\r",
-													"});\r",
-													"\r",
-													"\r",
-													"var jsonData = pm.response.json();\r",
-													"var idResponse = jsonData.id;\r",
-													"var idConta = pm.globals.get(\"idConta\");\r",
-													"\r",
-													"pm.test(\"Valida se o N. da conta listada é o mesmo da conta criada\", function() {\r",
-													"    pm.expect(idResponse).to.eql(idConta);\r",
-													"});\r",
-													"\r",
-													"\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://{{integrationURL}}/contas_consultas/pier/v2/api/contas/{{idConta}}",
-											"protocol": "https",
-											"host": [
-												"{{integrationURL}}"
-											],
-											"path": [
-												"contas_consultas",
-												"pier",
-												"v2",
-												"api",
-												"contas",
-												"{{idConta}}"
-											]
-										}
 									},
 									"response": []
 								},
@@ -17612,6 +17856,237 @@
 											]
 										},
 										"description": "Lambda: **lmb-int-contas**"
+									},
+									"response": []
+								},
+								{
+									"name": "PIER052 - GET:/pier/v2/api/limites-disponibilidades",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas-limites/api/limites-disponibilidades?idConta=70000849",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas-limites",
+												"api",
+												"limites-disponibilidades"
+											],
+											"query": [
+												{
+													"key": "idConta",
+													"value": "70000849"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER066 - GET:pier/v2/api/adesoes-pagamentos-sabados  Copy",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "incap_ses_1452_2842573=FPKTS1iSm0KyeFH9yYomFLRjdmQAAAAACZMRbSjHLOYO+J+R3mmwbA==; incap_ses_1616_2842573=MRQMezu/Z2iAnai+sy9tFt6tdGQAAAAATkMF9at8TQUYByMimH4qJQ==; nlbi_2842573=/1UuY+ikyxatXQMFxcIi6gAAAAC+4+LESALKv+LQHug7irT4; visid_incap_2842573=OJnrMLxXSuu4WJzezUt89GIVUWQAAAAAQUIPAAAAAABAmXfPPG8q86a0RGPVtHnX",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas-adesoes/api/adesoes-pagamentos-sabados?id=70001070&dataVencimento=2023-05-31",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas-adesoes",
+												"api",
+												"adesoes-pagamentos-sabados"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "70001070"
+												},
+												{
+													"key": "dataVencimento",
+													"value": "2023-05-31"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER024 - GET:/api/contas/{id}/faturas/abertas",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "incap_ses_1354_2842573=B0eCFMpR2SO9VJTIjWDKElmxeGQAAAAAa24DNkRMcQl7vqTNxddZDQ==; incap_ses_1452_2842573=ur7nRCPa8TdnC0H/yYomFO33d2QAAAAAotkyJghJVrOOkog5itM2rQ==; nlbi_2842573=/1UuY+ikyxatXQMFxcIi6gAAAAC+4+LESALKv+LQHug7irT4; visid_incap_2842573=OJnrMLxXSuu4WJzezUt89GIVUWQAAAAAQUIPAAAAAABAmXfPPG8q86a0RGPVtHnX"
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/faturas/api/contas/70001125/faturas/abertas",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"faturas",
+												"api",
+												"contas",
+												"70001125",
+												"faturas",
+												"abertas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER009 - GET:/api/contas/{id}/consultar-beneficio-pagamento-atraso",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas_consultas/api/contas/70001125/consultar-beneficio-pagamento-atraso",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas_consultas",
+												"api",
+												"contas",
+												"70001125",
+												"consultar-beneficio-pagamento-atraso"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER125 - PUT:/api/limites-disponibilidades",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas-limites/api/limites-disponibilidades?limiteGlobal=500.00&limiteCompra=500.00&limiteParcelado=0&limiteParcelas=0&limiteSaqueGlobal=500&limiteSaquePeriodo=500&idConta=70000849",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas-limites",
+												"api",
+												"limites-disponibilidades"
+											],
+											"query": [
+												{
+													"key": "limiteGlobal",
+													"value": "500.00"
+												},
+												{
+													"key": "limiteCompra",
+													"value": "500.00"
+												},
+												{
+													"key": "limiteParcelado",
+													"value": "0"
+												},
+												{
+													"key": "limiteParcelas",
+													"value": "0"
+												},
+												{
+													"key": "limiteSaqueGlobal",
+													"value": "500"
+												},
+												{
+													"key": "limiteSaquePeriodo",
+													"value": "500"
+												},
+												{
+													"key": "idConta",
+													"value": "70000849"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER068 - POST: pier/v2/api/adesoes-pagamentos-sabados",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas-adesoes/api/adesoes-pagamentos-sabados?id=70001070",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas-adesoes",
+												"api",
+												"adesoes-pagamentos-sabados"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "70001070"
+												},
+												{
+													"key": "dataVencimento",
+													"value": "2023-05-01",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "CARA004 - POST:/dock/p2ptransfer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Cookie",
+												"value": "incap_ses_1354_2842573=B0eCFMpR2SO9VJTIjWDKElmxeGQAAAAAa24DNkRMcQl7vqTNxddZDQ==; incap_ses_1452_2842573=ur7nRCPa8TdnC0H/yYomFO33d2QAAAAAotkyJghJVrOOkog5itM2rQ==; nlbi_2842573=/1UuY+ikyxatXQMFxcIi6gAAAAC+4+LESALKv+LQHug7irT4; visid_incap_2842573=OJnrMLxXSuu4WJzezUt89GIVUWQAAAAAQUIPAAAAAABAmXfPPG8q86a0RGPVtHnX"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"originalAccount\": 174,\r\n  \"destinationAccount\": 175,\r\n  \"amount\": 10,\r\n  \"description\": \"Descrição Vania\",\r\n  \"transactionDetails\": \"Detalhes Vania\"\r\n}"
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/transferencias/dock/p2ptransfer",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"transferencias",
+												"dock",
+												"p2ptransfer"
+											]
+										}
 									},
 									"response": []
 								}
@@ -21005,6 +21480,39 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "HEIM208 - Cadastro de solicitação proposta conta digital",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "apikey",
+												"value": "TGoGobRgn3lHBpYeLdL66EXiDjFM82EZ",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "https://{{integrationURL}}/contas-adicionais/api/contas/{id}/adicional",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"contas-adicionais",
+												"api",
+												"contas",
+												"{id}",
+												"adicional"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						}
@@ -21468,7 +21976,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "https://{{integrationURL}}/cartoes-manutencao/api/cartoes/70000973/bloquear?id_status=0&observacao=\"testing\"",
+									"raw": "https://{{integrationURL}}/cartoes-manutencao/api/cartoes/70001027/bloquear?id_status=2&observacao=\"testing\"",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21477,13 +21985,13 @@
 										"cartoes-manutencao",
 										"api",
 										"cartoes",
-										"70000973",
+										"70001027",
 										"bloquear"
 									],
 									"query": [
 										{
 											"key": "id_status",
-											"value": "0"
+											"value": "2"
 										},
 										{
 											"key": "observacao",
@@ -21710,7 +22218,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{integrationURL}}/cartoes/api/cartoes/1",
+									"raw": "https://{{integrationURL}}/cartoes/api/cartoes/2",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21719,7 +22227,7 @@
 										"cartoes",
 										"api",
 										"cartoes",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -21740,7 +22248,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{integrationURL}}/cartoes-cvv/api/cartoes/70000430/cvv-dinamico",
+									"raw": "https://{{integrationURL}}/cartoes-cvv/api/cartoes/70001026/cvv-dinamico",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21749,7 +22257,7 @@
 										"cartoes-cvv",
 										"api",
 										"cartoes",
-										"70000430",
+										"70001026",
 										"cvv-dinamico"
 									]
 								}
@@ -21837,7 +22345,901 @@
 				},
 				{
 					"name": "Negocio",
-					"item": []
+					"item": [
+						{
+							"name": "PIER134 - POST: /api/pessoas-detalhes/incluir_pessoa(+)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.globals.set(\"idPessoa\", jsonData.idPessoa);\r",
+											"//console.log(pm.globals.get(\"idPessoa\"));\r",
+											"var jsonData = pm.response.json();\r",
+											"console.log(jsonData);\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"    pm.response.to.be.ok\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"\r",
+											"const schema = \r",
+											"    \r",
+											"   {\r",
+											"    \"type\": \"object\",\r",
+											"    \"default\": {},\r",
+											"    \"title\": \"Root Schema\",\r",
+											"    \"required\": [\r",
+											"        \"idPessoa\",\r",
+											"        \"nomeMae\",\r",
+											"        \"idEstadoCivil\",\r",
+											"        \"idNaturezaOcupacao\",\r",
+											"        \"idProfissao\",\r",
+											"        \"idNacionalidade\",\r",
+											"        \"naturalidadeCidade\",\r",
+											"        \"naturalidadeEstado\",\r",
+											"        \"grauInstrucao\",\r",
+											"        \"email\",\r",
+											"        \"numeroCnh\",\r",
+											"        \"dataEmissaoCnh\",\r",
+											"        \"pessoaPoliticamenteExposta\",\r",
+											"        \"patrimonioTotal\",\r",
+											"        \"salario\",\r",
+											"        \"nomeEmpresa\",\r",
+											"        \"impedidoFinanciamento\",\r",
+											"        \"chequeEspecial\",\r",
+											"        \"flagSemEnderecoComercialFixo\",\r",
+											"        \"nomePai\",\r",
+											"        \"numeroDependentes\",\r",
+											"        \"numeroBanco\",\r",
+											"        \"numeroAgencia\",\r",
+											"        \"numeroContaCorrente\",\r",
+											"        \"nomeReferencia1\",\r",
+											"        \"enderecoReferencia1\",\r",
+											"        \"nomeReferencia2\",\r",
+											"        \"enderecoReferencia2\"\r",
+											"    ],\r",
+											"    \"properties\": {\r",
+											"        \"idPessoa\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idPessoa Schema\",\r",
+											"            \"examples\": [\r",
+											"                1497\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeMae\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeMae Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Annie Lennox\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idEstadoCivil\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idEstadoCivil Schema\",\r",
+											"            \"examples\": [\r",
+											"                1\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idNaturezaOcupacao\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idNaturezaOcupacao Schema\",\r",
+											"            \"examples\": [\r",
+											"                9876987\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idProfissao\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The idProfissao Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Engenheiro\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idNacionalidade\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idNacionalidade Schema\",\r",
+											"            \"examples\": [\r",
+											"                76\r",
+											"            ]\r",
+											"        },\r",
+											"        \"naturalidadeCidade\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The naturalidadeCidade Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"São Paulo\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"naturalidadeEstado\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The naturalidadeEstado Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"SP\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"grauInstrucao\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The grauInstrucao Schema\",\r",
+											"            \"examples\": [\r",
+											"                1\r",
+											"            ]\r",
+											"        },\r",
+											"        \"email\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The email Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"massa@email.com\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroCnh\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The numeroCnh Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"23143031556\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"dataEmissaoCnh\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The dataEmissaoCnh Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"2020-10-31\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"pessoaPoliticamenteExposta\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The pessoaPoliticamenteExposta Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"patrimonioTotal\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The patrimonioTotal Schema\",\r",
+											"            \"examples\": [\r",
+											"                100000\r",
+											"            ]\r",
+											"        },\r",
+											"        \"salario\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The salario Schema\",\r",
+											"            \"examples\": [\r",
+											"                2200\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeEmpresa\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeEmpresa Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some company\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"impedidoFinanciamento\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The impedidoFinanciamento Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"chequeEspecial\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The chequeEspecial Schema\",\r",
+											"            \"examples\": [\r",
+											"                0\r",
+											"            ]\r",
+											"        },\r",
+											"        \"flagSemEnderecoComercialFixo\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The flagSemEnderecoComercialFixo Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomePai\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomePai Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Pai da Silva\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroDependentes\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroDependentes Schema\",\r",
+											"            \"examples\": [\r",
+											"                2\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroBanco\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroBanco Schema\",\r",
+											"            \"examples\": [\r",
+											"                12345\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroAgencia\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroAgencia Schema\",\r",
+											"            \"examples\": [\r",
+											"                12349\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroContaCorrente\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The numeroContaCorrente Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"9865544\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeReferencia1\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeReferencia1 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some nomeReferencia1\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"enderecoReferencia1\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The enderecoReferencia1 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some enderecoReferencia1\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeReferencia2\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeReferencia2 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some nomeReferencia2\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"enderecoReferencia2\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The enderecoReferencia2 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some enderecoReferencia2\"\r",
+											"            ]\r",
+											"        }\r",
+											"    },\r",
+											"    \"examples\": [{\r",
+											"        \"idPessoa\": 1497,\r",
+											"        \"nomeMae\": \"Annie Lennox\",\r",
+											"        \"idEstadoCivil\": 1,\r",
+											"        \"idNaturezaOcupacao\": 9876987,\r",
+											"        \"idProfissao\": \"Engenheiro\",\r",
+											"        \"idNacionalidade\": 76,\r",
+											"        \"naturalidadeCidade\": \"São Paulo\",\r",
+											"        \"naturalidadeEstado\": \"SP\",\r",
+											"        \"grauInstrucao\": 1,\r",
+											"        \"email\": \"massa@email.com\",\r",
+											"        \"numeroCnh\": \"23143031556\",\r",
+											"        \"dataEmissaoCnh\": \"2020-10-31\",\r",
+											"        \"pessoaPoliticamenteExposta\": false,\r",
+											"        \"patrimonioTotal\": 100000,\r",
+											"        \"salario\": 2200,\r",
+											"        \"nomeEmpresa\": \"some company\",\r",
+											"        \"impedidoFinanciamento\": false,\r",
+											"        \"chequeEspecial\": 0,\r",
+											"        \"flagSemEnderecoComercialFixo\": false,\r",
+											"        \"nomePai\": \"Pai da Silva\",\r",
+											"        \"numeroDependentes\": 2,\r",
+											"        \"numeroBanco\": 12345,\r",
+											"        \"numeroAgencia\": 12349,\r",
+											"        \"numeroContaCorrente\": \"9865544\",\r",
+											"        \"nomeReferencia1\": \"some nomeReferencia1\",\r",
+											"        \"enderecoReferencia1\": \"some enderecoReferencia1\",\r",
+											"        \"nomeReferencia2\": \"some nomeReferencia2\",\r",
+											"        \"enderecoReferencia2\": \"some enderecoReferencia2\"\r",
+											"    }]\r",
+											"}\r",
+											"\r",
+											"pm.test(\"Validar a estrutura do corpo\", function () {\r",
+											"    pm.response.to.have.jsonSchema(schema);\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"const schema = \r",
+											"    \r",
+											"   {\r",
+											"    \"type\": \"object\",\r",
+											"    \"default\": {},\r",
+											"    \"title\": \"Root Schema\",\r",
+											"    \"required\": [\r",
+											"        \"idPessoa\",\r",
+											"        \"nomeMae\",\r",
+											"        \"idEstadoCivil\",\r",
+											"        \"idNaturezaOcupacao\",\r",
+											"        \"idProfissao\",\r",
+											"        \"idNacionalidade\",\r",
+											"        \"naturalidadeCidade\",\r",
+											"        \"naturalidadeEstado\",\r",
+											"        \"grauInstrucao\",\r",
+											"        \"email\",\r",
+											"        \"numeroCnh\",\r",
+											"        \"dataEmissaoCnh\",\r",
+											"        \"pessoaPoliticamenteExposta\",\r",
+											"        \"patrimonioTotal\",\r",
+											"        \"salario\",\r",
+											"        \"nomeEmpresa\",\r",
+											"        \"impedidoFinanciamento\",\r",
+											"        \"chequeEspecial\",\r",
+											"        \"flagSemEnderecoComercialFixo\",\r",
+											"        \"nomePai\",\r",
+											"        \"numeroDependentes\",\r",
+											"        \"numeroBanco\",\r",
+											"        \"numeroAgencia\",\r",
+											"        \"numeroContaCorrente\",\r",
+											"        \"nomeReferencia1\",\r",
+											"        \"enderecoReferencia1\",\r",
+											"        \"nomeReferencia2\",\r",
+											"        \"enderecoReferencia2\"\r",
+											"    ],\r",
+											"    \"properties\": {\r",
+											"        \"idPessoa\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idPessoa Schema\",\r",
+											"            \"examples\": [\r",
+											"                1497\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeMae\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeMae Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Annie Lennox\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idEstadoCivil\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idEstadoCivil Schema\",\r",
+											"            \"examples\": [\r",
+											"                1\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idNaturezaOcupacao\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idNaturezaOcupacao Schema\",\r",
+											"            \"examples\": [\r",
+											"                9876987\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idProfissao\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The idProfissao Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Engenheiro\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"idNacionalidade\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The idNacionalidade Schema\",\r",
+											"            \"examples\": [\r",
+											"                76\r",
+											"            ]\r",
+											"        },\r",
+											"        \"naturalidadeCidade\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The naturalidadeCidade Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"São Paulo\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"naturalidadeEstado\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The naturalidadeEstado Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"SP\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"grauInstrucao\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The grauInstrucao Schema\",\r",
+											"            \"examples\": [\r",
+											"                1\r",
+											"            ]\r",
+											"        },\r",
+											"        \"email\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The email Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"massa@email.com\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroCnh\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The numeroCnh Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"23143031556\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"dataEmissaoCnh\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The dataEmissaoCnh Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"2020-10-31\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"pessoaPoliticamenteExposta\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The pessoaPoliticamenteExposta Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"patrimonioTotal\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The patrimonioTotal Schema\",\r",
+											"            \"examples\": [\r",
+											"                100000\r",
+											"            ]\r",
+											"        },\r",
+											"        \"salario\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The salario Schema\",\r",
+											"            \"examples\": [\r",
+											"                2200\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeEmpresa\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeEmpresa Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some company\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"impedidoFinanciamento\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The impedidoFinanciamento Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"chequeEspecial\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The chequeEspecial Schema\",\r",
+											"            \"examples\": [\r",
+											"                0\r",
+											"            ]\r",
+											"        },\r",
+											"        \"flagSemEnderecoComercialFixo\": {\r",
+											"            \"type\": \"boolean\",\r",
+											"            \"default\": false,\r",
+											"            \"title\": \"The flagSemEnderecoComercialFixo Schema\",\r",
+											"            \"examples\": [\r",
+											"                false\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomePai\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomePai Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"Pai da Silva\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroDependentes\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroDependentes Schema\",\r",
+											"            \"examples\": [\r",
+											"                2\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroBanco\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroBanco Schema\",\r",
+											"            \"examples\": [\r",
+											"                12345\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroAgencia\": {\r",
+											"            \"type\": \"integer\",\r",
+											"            \"default\": 0,\r",
+											"            \"title\": \"The numeroAgencia Schema\",\r",
+											"            \"examples\": [\r",
+											"                12349\r",
+											"            ]\r",
+											"        },\r",
+											"        \"numeroContaCorrente\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The numeroContaCorrente Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"9865544\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeReferencia1\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeReferencia1 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some nomeReferencia1\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"enderecoReferencia1\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The enderecoReferencia1 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some enderecoReferencia1\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"nomeReferencia2\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The nomeReferencia2 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some nomeReferencia2\"\r",
+											"            ]\r",
+											"        },\r",
+											"        \"enderecoReferencia2\": {\r",
+											"            \"type\": \"string\",\r",
+											"            \"default\": \"\",\r",
+											"            \"title\": \"The enderecoReferencia2 Schema\",\r",
+											"            \"examples\": [\r",
+											"                \"some enderecoReferencia2\"\r",
+											"            ]\r",
+											"        }\r",
+											"    },\r",
+											"    \"examples\": [{\r",
+											"        \"idPessoa\": 1497,\r",
+											"        \"nomeMae\": \"Annie Lennox\",\r",
+											"        \"idEstadoCivil\": 1,\r",
+											"        \"idNaturezaOcupacao\": 9876987,\r",
+											"        \"idProfissao\": \"Engenheiro\",\r",
+											"        \"idNacionalidade\": 76,\r",
+											"        \"naturalidadeCidade\": \"São Paulo\",\r",
+											"        \"naturalidadeEstado\": \"SP\",\r",
+											"        \"grauInstrucao\": 1,\r",
+											"        \"email\": \"massa@email.com\",\r",
+											"        \"numeroCnh\": \"23143031556\",\r",
+											"        \"dataEmissaoCnh\": \"2020-10-31\",\r",
+											"        \"pessoaPoliticamenteExposta\": false,\r",
+											"        \"patrimonioTotal\": 100000,\r",
+											"        \"salario\": 2200,\r",
+											"        \"nomeEmpresa\": \"some company\",\r",
+											"        \"impedidoFinanciamento\": false,\r",
+											"        \"chequeEspecial\": 0,\r",
+											"        \"flagSemEnderecoComercialFixo\": false,\r",
+											"        \"nomePai\": \"Pai da Silva\",\r",
+											"        \"numeroDependentes\": 2,\r",
+											"        \"numeroBanco\": 12345,\r",
+											"        \"numeroAgencia\": 12349,\r",
+											"        \"numeroContaCorrente\": \"9865544\",\r",
+											"        \"nomeReferencia1\": \"some nomeReferencia1\",\r",
+											"        \"enderecoReferencia1\": \"some enderecoReferencia1\",\r",
+											"        \"nomeReferencia2\": \"some nomeReferencia2\",\r",
+											"        \"enderecoReferencia2\": \"some enderecoReferencia2\"\r",
+											"    }]\r",
+											"};"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"pessoas-detalhes",
+										"api",
+										"pessoas-detalhes"
+									],
+									"query": [
+										{
+											"key": "idPessoa",
+											"value": "1497"
+										},
+										{
+											"key": "nomeMae",
+											"value": "Annie Lennox"
+										},
+										{
+											"key": "idEstadoCivil",
+											"value": "1"
+										},
+										{
+											"key": "idProfissao",
+											"value": "Engenheiro"
+										},
+										{
+											"key": "idNaturezaOcupacao",
+											"value": "9876987"
+										},
+										{
+											"key": "idNacionalidade",
+											"value": "76"
+										},
+										{
+											"key": "numeroBanco",
+											"value": "12345"
+										},
+										{
+											"key": "numeroAgencia",
+											"value": "12349"
+										},
+										{
+											"key": "numeroContaCorrente",
+											"value": "9865544"
+										},
+										{
+											"key": "email",
+											"value": "massa@email.com"
+										},
+										{
+											"key": "naturalidadeCidade",
+											"value": "São Paulo"
+										},
+										{
+											"key": "naturalidadeEstado",
+											"value": "SP"
+										},
+										{
+											"key": "grauInstrucao",
+											"value": "1"
+										},
+										{
+											"key": "nomePai",
+											"value": "Pai da Silva"
+										},
+										{
+											"key": "numeroCnh",
+											"value": "23143031556"
+										},
+										{
+											"key": "pessoaPoliticamenteExposta",
+											"value": "false"
+										},
+										{
+											"key": "usuarioAlteracao",
+											"value": "666"
+										},
+										{
+											"key": "flagSemEnderecoComercialFixo",
+											"value": "false"
+										},
+										{
+											"key": "dataEmissaoCnh",
+											"value": "2020-10-31"
+										},
+										{
+											"key": "numeroDependentes",
+											"value": "2"
+										},
+										{
+											"key": "impedidoFinanciamento",
+											"value": "false"
+										},
+										{
+											"key": "nomeEmpresa",
+											"value": "some company"
+										},
+										{
+											"key": "nomeReferencia1",
+											"value": "some nomeReferencia1"
+										},
+										{
+											"key": "enderecoReferencia1",
+											"value": "some enderecoReferencia1"
+										},
+										{
+											"key": "nomeReferencia2",
+											"value": "some nomeReferencia2"
+										},
+										{
+											"key": "enderecoReferencia2",
+											"value": "some enderecoReferencia2"
+										},
+										{
+											"key": "chequeEspecial",
+											"value": "0"
+										},
+										{
+											"key": "flagNomePaiNaoInformado",
+											"value": "false"
+										},
+										{
+											"key": "salario",
+											"value": "2200"
+										},
+										{
+											"key": "patrimonioTotal",
+											"value": "100000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER097 - POST: /api/contas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.globals.set(\"idConta\", jsonData.id);\r",
+											"console.log(pm.globals.get(\"idConta\"));\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.ok;\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idPessoa\": 1497,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 99,\n    \"diaVencimento\": 11,\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 1\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas"
+									],
+									"query": [
+										{
+											"key": "idPessoa",
+											"value": "{{idPessoa}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//para gerar o cartão executar o endpoint:https://{{integrationURL}}/contas/api/contas?idPessoa=1298 e capturar o id gerado no request e passar como argumento neste endpoint. A var \"idConta\" esta armazendo o id gerado no endpoint acima.\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idMifare\": 0,\n  \"matriculaMifare\": \"string\",\n  \"idProduto\" : 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/1497/gerar-cartao",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"{{idConta}}",
+										"pessoas",
+										"1497",
+										"gerar-cartao"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
