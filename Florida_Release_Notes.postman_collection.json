@@ -7496,7 +7496,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=2&idPessoa={{id_pessoa}}&ddd=11&telefone=991882511&ramal=1",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=18&idPessoa={{id_pessoa}}&ddd=11&telefone=991882511&ramal=1",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -7509,7 +7509,7 @@
 											"query": [
 												{
 													"key": "idTipoTelefone",
-													"value": "2"
+													"value": "18"
 												},
 												{
 													"key": "idPessoa",
@@ -21553,7 +21553,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/1497/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPessoa}}/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -21564,7 +21564,7 @@
 										"contas",
 										"{{idConta}}",
 										"pessoas",
-										"1497",
+										"{{idPessoa}}",
 										"gerar-cartao"
 									]
 								}
@@ -22353,13 +22353,6 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"var jsonData = pm.response.json();\r",
-											"pm.globals.set(\"idPessoa\", jsonData.idPessoa);\r",
-											"console.log(pm.globals.get(\"idPessoa\"));\r",
-											"var jsonData = pm.response.json();\r",
-											"console.log(jsonData);\r",
-											"\r",
-											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
@@ -22668,6 +22661,13 @@
 											"pm.test(\"Validar a estrutura do corpo\", function () {\r",
 											"    pm.response.to.have.jsonSchema(schema);\r",
 											"});\r",
+											"\r",
+											"// Extrair o valor do campo idPessoa da resposta\r",
+											"var jsonData = pm.response.json();\r",
+											"var idPeople = jsonData.idPessoa;\r",
+											"// Armazenar o valor em uma variável global\r",
+											"pm.globals.set(\"idPeople\", idPeople);\r",
+											"console.log(jsonData);\r",
 											"\r",
 											"\r",
 											""
@@ -23119,6 +23119,137 @@
 							"response": []
 						},
 						{
+							"name": "PIER138 - POST: /api/telefones_inclui_valido(+)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(pm.globals.get(\"idPeople\"));\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.ok;\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"// Obter o valor do campo \"idPessoa\" do response\r",
+											"//var idPessoaResponse = pm.response.json().idPessoa;\r",
+											"// Obter o valor da variável global \"id_pessoa\"\r",
+											"//var idPessoaGlobal = pm.globals.get(\"id_pessoa\");\r",
+											"// Verificar se o valor da variável global é igual ao campo \"idPessoa\" do response\r",
+											"//pm.test(\"Validar se id_pessoa do response é = var global do request\", function () {\r",
+											"   // pm.expect(idPessoaResponse).to.equal(idPessoaGlobal);\r",
+											"//});\r",
+											"\r",
+											"pm.test(\"idTipoTelefone não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.idTipoTelefone; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"idPessoa não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.idPessoa; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"ddd não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.ddd; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"telefone não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.telefone; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"ramal não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.ramal; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"status pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.status; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar campo telefone como numérico\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var telefone = jsonData.telefone;\r",
+											"    pm.expect(/^\\d+$/.test(telefone)).to.be.true;\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//var id_pessoa = 1323;\r",
+											"//pm.globals.set(\"idPessoa\", jsonData.idPessoa);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=18&idPessoa={{idPeople}}&ddd=11&telefone=991882511&ramal=1",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"telefones",
+										"api",
+										"telefones"
+									],
+									"query": [
+										{
+											"key": "idTipoTelefone",
+											"value": "18"
+										},
+										{
+											"key": "idPessoa",
+											"value": "{{idPeople}}"
+										},
+										{
+											"key": "ddd",
+											"value": "11"
+										},
+										{
+											"key": "telefone",
+											"value": "991882511"
+										},
+										{
+											"key": "ramal",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "PIER097 - POST: /api/contas",
 							"event": [
 								{
@@ -23128,6 +23259,7 @@
 											"var jsonData = pm.response.json();\r",
 											"pm.globals.set(\"idConta\", jsonData.id);\r",
 											"console.log(pm.globals.get(\"idConta\"));\r",
+											"console.log(pm.globals.get(\"idPessoa\"));\r",
 											"\r",
 											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
@@ -23169,7 +23301,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
+									"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPeople}}",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -23182,7 +23314,7 @@
 									"query": [
 										{
 											"key": "idPessoa",
-											"value": "{{idPessoa}}"
+											"value": "{{idPeople}}"
 										}
 									]
 								}
@@ -23197,7 +23329,7 @@
 									"script": {
 										"exec": [
 											"//para gerar o cartão executar o endpoint:https://{{integrationURL}}/contas/api/contas?idPessoa=1298 e capturar o id gerado no request e passar como argumento neste endpoint. A var \"idConta\" esta armazendo o id gerado no endpoint acima.\r",
-											"\r",
+											"console.log(pm.globals.get(\"idPessoa\"));\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
@@ -23221,7 +23353,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/1497/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPeople}}/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -23232,7 +23364,7 @@
 										"contas",
 										"{{idConta}}",
 										"pessoas",
-										"1497",
+										"{{idPeople}}",
 										"gerar-cartao"
 									]
 								}
