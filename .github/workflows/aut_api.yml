@@ -54,7 +54,7 @@ jobs:
         # Required mail subject:
          subject: Github Actions test job result
         # Required recipients' addresses:
-         to: sauliktest@gmail.com,Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,silvio.aulik@gmail.com,vinicius.andrade@gok.digital
+         to: sauliktest@gmail.com,Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,silvio.aulik@gmail.com,vinicius.andrade@gok.digital,rudy.decol@novigisolution.com.br
         # Required sender full name (address can be skipped):
          from: sauliktest@gmail.com
         # Optional plain body:
