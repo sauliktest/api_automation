@@ -11017,7 +11017,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -11102,7 +11102,7 @@
 												},
 												{
 													"key": "dataEmissaoCnh",
-													"value": "2020-10-31"
+													"value": "2020-10-31T01:30:00.000-05:00"
 												},
 												{
 													"key": "numeroDependentes",
@@ -22355,7 +22355,7 @@
 										"exec": [
 											"var jsonData = pm.response.json();\r",
 											"pm.globals.set(\"idPessoa\", jsonData.idPessoa);\r",
-											"//console.log(pm.globals.get(\"idPessoa\"));\r",
+											"console.log(pm.globals.get(\"idPessoa\"));\r",
 											"var jsonData = pm.response.json();\r",
 											"console.log(jsonData);\r",
 											"\r",
@@ -22982,7 +22982,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+									"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -23067,7 +23067,7 @@
 										},
 										{
 											"key": "dataEmissaoCnh",
-											"value": "2020-10-31"
+											"value": "2020-10-31T01:30:00.000-05:00"
 										},
 										{
 											"key": "numeroDependentes",
