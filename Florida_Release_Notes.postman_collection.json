@@ -285,6 +285,7 @@
 													"    var descricaoRetorno = responseJson.descricaoRetorno; \r",
 													"    pm.expect(descricaoRetorno).to.equal(\"Solicitação cadastrada com sucesso\");\r",
 													"});\r",
+													"",
 													""
 												],
 												"type": "text/javascript"
@@ -5785,6 +5786,74 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "PIER054 - GET: /api/pessoas",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Extrai o valor do campo \"id\" do response\r",
+													"const idValue = pm.response.json().content[0].id;\r",
+													"// Salva o valor em uma variável de ambiente chamada \"idPessoa\"\r",
+													"pm.environment.set(\"idPessoa\", idValue.toString());\r",
+													"// Exibe o valor da variável no console do Postman\r",
+													"console.log(\"Valor da variável idPessoa:\", pm.environment.get(\"idPessoa\"));\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/pessoas/api/pessoas?cpf={{generatedCPF}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"pessoas",
+												"api",
+												"pessoas"
+											],
+											"query": [
+												{
+													"key": "cpf",
+													"value": "{{generatedCPF}}"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -5826,14 +5895,6 @@
 												}
 											]
 										}
-									},
-									"response": []
-								},
-								{
-									"name": "HEIM049 - DELETE:/api/contas/{id}/debitos-automaticos/{idDebito} /v2",
-									"request": {
-										"method": "GET",
-										"header": []
 									},
 									"response": []
 								},
@@ -7214,7 +7275,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1550&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -7227,7 +7288,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1550"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -8731,7 +8792,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1498&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1 some nomeReferencia1 some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12345&numeroContaCorrente=12345&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1 some nomeReferencia1 some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -8744,7 +8805,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1498"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -8910,7 +8971,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Pauloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Pauloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -8923,7 +8984,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -9316,7 +9377,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=257&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=257&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9329,7 +9390,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -9774,7 +9835,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=AAAAAAAAAA&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=AAAAAAAAAA&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -9787,7 +9848,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -10003,7 +10064,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=aaaaaaaaaa&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=aaaaaaaaaa&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10016,7 +10077,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -10148,16 +10209,28 @@
 												"exec": [
 													"//https://viverebrasil.atlassian.net/browse/FLOR-7361 em analise pelo DEV\r",
 													"\r",
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"   \r",
+													"    pm.response.to.be.badRequest;\r",
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});\r",
-													""
+													"\r",
+													"// Faz a análise do JSON de resposta\r",
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"// Verifica se a mensagem de erro principal está correta\r",
+													"pm.test(\"Mensagem de erro principal está correta\", function() {\r",
+													"    pm.expect(responseJson.error.message).to.equal(\"Dados de entrada inválidos.\");\r",
+													"});\r",
+													"\r",
+													"// Verifica se a mensagem de erro individual está correta\r",
+													"pm.test(\"Mensagem de erro individual está correta\", function() {\r",
+													"    pm.expect(responseJson.error.errors[0].message).to.equal(\"O campo dataEmissaoCnh informado é inválido.\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -10232,7 +10305,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=1&idNaturezaOcupacao=9&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=05:00-10-31T01:30:00.000-4567&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae Silva&idEstadoCivil=1&idProfissao=1&idNaturezaOcupacao=9&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=05:00-10-31T01:30:00.000-4567&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10245,7 +10318,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -13223,7 +13296,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"O programa informado é inexistente\");\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"Programa não encontrado\");\r",
 													"});\r",
 													""
 												],
@@ -13721,7 +13794,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": {{idPessoa}},\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": {{idEndereco}}\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -13729,7 +13802,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -13742,7 +13815,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -13814,7 +13887,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": {{idPessoa}},\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": {{idEndereco}}\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -13822,7 +13895,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -13835,7 +13908,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -14094,7 +14167,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": {{idPessoa}},\n    \"id\": 0,\n    \"idProduto\": {{idProduto}},\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": {{diaVencimento}},\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": {{idEndereco}}\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -14102,7 +14175,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14115,7 +14188,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -14443,11 +14516,32 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
+													"pm.test(\"Status code is 500\", function () {\r",
+													"    pm.response.to.have.status(500);\r",
 													"});\r",
 													"\r",
-													""
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.serverError\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"// Faz a análise do JSON de resposta\r",
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"// Verifica se o código de erro é 9999\r",
+													"pm.test(\"Código de erro é 9999\", function() {\r",
+													"    pm.expect(responseJson.error.errorCode).to.equal(\"9999\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													"\r",
+													"\r",
+													"// Verifica se a mensagem de erro está correta\r",
+													"pm.test(\"Mensagem de erro está correta\", function() {\r",
+													"    pm.expect(responseJson.error.message).to.equal(\"Internal Server Error\");\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -14458,7 +14552,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"idPessoa\": 1298,\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 0,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": 9999999\n  }",
+											"raw": "{\n    \"idPessoa\": \"{{idPessoa}}\",\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 19,\n    \"diaVencimento\": 5,\n    \"limiteGlobal\": 00,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\":\"{{idEndereco}}\"\n  }",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -14466,7 +14560,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14479,7 +14573,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -14551,8 +14645,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
@@ -14582,7 +14676,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa=1298",
+											"raw": "https://{{integrationURL}}/contas/api/contas?idPessoa={{idPessoa}}",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -14595,7 +14689,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1298"
+													"value": "{{idPessoa}}"
 												}
 											]
 										}
@@ -14780,8 +14874,8 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
@@ -16908,7 +17002,7 @@
 							"name": "Telefones",
 							"item": [
 								{
-									"name": "PIER138 - POST: /api/telefones_inclui_valido(+)",
+									"name": "PIER138 - POST: /api/telefones_inclui_telefone(+)",
 									"event": [
 										{
 											"listen": "test",
@@ -17001,7 +17095,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=18&idPessoa={{id_pessoa}}&ddd=11&telefone=991882511&ramal=1",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=18&idPessoa={{idPessoa}}&ddd=11&telefone=991882511&ramal=1",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -17018,7 +17112,7 @@
 												},
 												{
 													"key": "idPessoa",
-													"value": "{{id_pessoa}}"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "ddd",
@@ -19228,7 +19322,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 70000739,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -19236,7 +19330,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/70000739/cadastrar-adicional",
+											"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/cadastrar-adicional",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -19245,7 +19339,7 @@
 												"contas",
 												"api",
 												"contas",
-												"70000739",
+												"{{idConta}}",
 												"cadastrar-adicional"
 											]
 										}
@@ -22618,7 +22712,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPeople}}/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPessoa}}/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -22629,7 +22723,7 @@
 										"contas",
 										"{{idConta}}",
 										"pessoas",
-										"{{idPeople}}",
+										"{{idPessoa}}",
 										"gerar-cartao"
 									]
 								}
@@ -23572,6 +23666,22 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"// Extrai o valor do campo id referente ao cadastro da Proposta\r",
+											"//const idValue = pm.response.json().solicitacao.id;\r",
+											"// Converte o valor para string\r",
+											"//const idValueAsString = idValue.toString();\r",
+											"// Salva o valor convertido em uma variável de ambiente chamada \"idProposta\"\r",
+											"//pm.environment.set(\"idProposta\", idValueAsString);\r",
+											"// Exibe o valor da variável convertida no console\r",
+											"//console.log(\"Valor da variável idProposta:\", pm.environment.get(\"idProposta\"));\r",
+											"\r",
+											"// Obtém o tipo da variável idProposta para converte-la para string\r",
+											"//const tipoIdProposta = typeof pm.environment.get(\"idProposta\");\r",
+											"// Exibe o tipo da variável idProposta convertida\r",
+											"//console.log(\"Tipo da variável idProposta:\", tipoIdProposta);\r",
+											"\r",
+											"\r",
+											"\r",
 											"// Obter a resposta em formato JSON\r",
 											"var responseJson = pm.response.json();\r",
 											"\r",
@@ -23835,6 +23945,7 @@
 											"    var descricaoRetorno = responseJson.descricaoRetorno; \r",
 											"    pm.expect(descricaoRetorno).to.equal(\"Solicitação cadastrada com sucesso\");\r",
 											"});\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript"
@@ -23923,18 +24034,97 @@
 							"response": []
 						},
 						{
+							"name": "PIER054 - GET: /api/pessoas",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Atraso de 1 minuto (60 segundos) para dar tempo\r",
+											"//da proposta gerar i idPessoa\r",
+											"const delayInSeconds = 60;\r",
+											"\r",
+											"// Converte o atraso para milissegundos\r",
+											"const delayInMilliseconds = delayInSeconds * 1000;\r",
+											"\r",
+											"// Aguarda o tempo especificado antes de continuar\r",
+											"setTimeout(function () {\r",
+											"    // Executa o request\r",
+											"    pm.sendRequest({\r",
+											"        url: `https://{{integrationURL}}/pessoas/api/pessoas?cpf={{generatedCPF}}`,\r",
+											"        method: 'GET'\r",
+											"    }, function (err, response) {\r",
+											"        // Adicione o código de tratamento da resposta aqui\r",
+											"    });\r",
+											"}, delayInMilliseconds);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Extrai o valor do campo \"id\" do response\r",
+											"const idValue = pm.response.json().content[0].id;\r",
+											"// Salva o valor em uma variável de ambiente chamada \"idPessoa\"\r",
+											"pm.environment.set(\"idPessoa\", idValue.toString());\r",
+											"// Exibe o valor da variável no console do Postman\r",
+											"console.log(\"Valor da variável idPessoa:\", pm.environment.get(\"idPessoa\"));\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/pessoas/api/pessoas?cpf={{generatedCPF}}",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"pessoas",
+										"api",
+										"pessoas"
+									],
+									"query": [
+										{
+											"key": "cpf",
+											"value": "{{generatedCPF}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "PIER134 - POST: /api/pessoas-detalhes/incluir_pessoa(+)",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"// Extrai o valor do campo idPessoa da resposta\r",
-											"const idPessoaValue = pm.response.json().idPessoa;\r",
-											"// Salva o valor em uma variável de ambiente chamada \"idPessoa\"\r",
-											"pm.environment.set(\"idPessoa\", idPessoaValue.toString());\r",
-											"\r",
-											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
@@ -24244,6 +24434,7 @@
 											"});\r",
 											"\r",
 											"\r",
+											"",
 											""
 										],
 										"type": "text/javascript"
@@ -24253,17 +24444,6 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"// Gera um número aleatório entre 0 e 9999 (4 dígitos)\r",
-											"//const randomNumber = Math.floor(Math.random() * 10000);\r",
-											"\r",
-											"// Concatena o número aleatório gerado com \"7000\" para manter os primeiros 4 dígitos como 7000\r",
-											"//const idPessoaValue = \"7000\" + randomNumber.toString().padStart(4, \"0\");\r",
-											"\r",
-											"// Salva o número gerado em uma variável chamada \"numeroAleatorio\"\r",
-											"//pm.environment.set(\"numeroAleatorio\", idPessoaValue);\r",
-											"\r",
-											"\r",
-											"\r",
 											"const schema = \r",
 											"    \r",
 											"   {\r",
@@ -24566,7 +24746,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1550&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+									"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Annie Lennox&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=9865544&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Pai da Silva&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=2&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -24579,7 +24759,7 @@
 									"query": [
 										{
 											"key": "idPessoa",
-											"value": "1550"
+											"value": "{{idPessoa}}"
 										},
 										{
 											"key": "nomeMae",
@@ -24714,8 +24894,6 @@
 											"// Salva o valor em uma variável de ambiente chamada \"idEndereco\"\r",
 											"pm.environment.set(\"idEndereco\", idEnderecoValue.toString());\r",
 											"console.log(\"Valor da variável idEndereco:\", pm.environment.get(\"idEndereco\"));\r",
-											"\r",
-											"\r",
 											"\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
@@ -24931,7 +25109,8 @@
 											"// Comparar os valores\r",
 											"pm.test(\"Validar o valor do campo idPessoa no response\", function () {\r",
 											"    pm.expect(idPessoaResponse).to.eql(idPessoaRequest);\r",
-											"});"
+											"});",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -25049,6 +25228,7 @@
 											"});\r",
 											"\r",
 											"\r",
+											"",
 											""
 										],
 										"type": "text/javascript"
@@ -25069,7 +25249,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"idPessoa\": \"{{idPessoa}}\",\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 99,\n    \"diaVencimento\": 11,\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": \"{{idEndereco}}\"\n  }",
+									"raw": "{\n    \"idPessoa\": {{idPessoa}},\n    \"id\": 0,\n    \"idProduto\": 12,\n    \"idOrigemComercial\": 99,\n    \"diaVencimento\": 11,\n    \"limiteGlobal\": 500,\n    \"limiteMaximo\": 500,\n    \"limiteParcelas\": 500,\n    \"valorRenda\": 1000,\n    \"valorPontuacao\": 0,\n    \"limiteConsignado\": 0,\n    \"pacoteTarifa\": 1,\n    \"flagCreditoAtivo\": true,\n    \"flagDebitoAtivo\": true,\n    \"flagPLDiferenciado\": true,\n    \"flagOverLimit\": true,\n    \"flagCarteiraDigital\": true,\n    \"flagFaturaPorEmail\": null,\n    \"idStatusConta\": 50,\n    \"canalEntrada\": \"string\",\n    \"funcaoAtiva\": \"CREDITO\",\n    \"matricula\": 0,\n    \"responsavelDigitacao\": \"FABIOAGUIAR\",\n    \"idPromotorVenda\": 55,\n    \"behaviorScore\": 0,\n    \"idEnderecoCorrespondencia\": {{idEndereco}}\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -25098,6 +25278,233 @@
 							"response": []
 						},
 						{
+							"name": "PIER138 - POST: /api/telefones_inclui_telefone(+)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+											"     pm.response.to.be.ok;\r",
+											"     pm.response.to.be.withBody;\r",
+											"     pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"// Extrai o valor do campo idPessoa do response\r",
+											"const idPessoaResponse = pm.response.json().idPessoa;\r",
+											"// Obtém o valor da variável de ambiente \"idProposta\"\r",
+											"const idProposta = pm.environment.get(\"idProposta\");\r",
+											"// Converte idProposta para número para fins de comparação\r",
+											"const idPropostaNumber = parseInt(idProposta);\r",
+											"// Converte idPessoaResponse para número para fins de comparação\r",
+											"const idPessoaResponseNumber = parseInt(idPessoaResponse);\r",
+											"// Compara os valores\r",
+											"pm.test(\"Valida idPessoa Response X idProposta Request\", function () {\r",
+											"    pm.expect(idPessoaResponseNumber).to.equal(idPropostaNumber);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"idTipoTelefone não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.idTipoTelefone; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"idPessoa não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.idPessoa; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"ddd não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.ddd; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"telefone não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.telefone; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"ramal não pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.ramal; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"status pode devolver nullo\", function () {\r",
+											"    const responseBody = pm.response.json();\r",
+											"    const nomeCampo = responseBody.status; \r",
+											"    pm.expect(nomeCampo).to.not.equal(null);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar campo telefone como numérico\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var telefone = jsonData.telefone;\r",
+											"    pm.expect(/^\\d+$/.test(telefone)).to.be.true;\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var id_pessoa = 1323;\r",
+											"pm.globals.set(\"id_pessoa\", id_pessoa);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=18&idPessoa={{idPessoa}}&ddd=11&telefone=991882511&ramal=1",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"telefones",
+										"api",
+										"telefones"
+									],
+									"query": [
+										{
+											"key": "idTipoTelefone",
+											"value": "18"
+										},
+										{
+											"key": "idPessoa",
+											"value": "{{idPessoa}}"
+										},
+										{
+											"key": "ddd",
+											"value": "11"
+										},
+										{
+											"key": "telefone",
+											"value": "991882511"
+										},
+										{
+											"key": "ramal",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PIER011 - POST: /api/contas/{id}/cadastrar-adicional_novo(+)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Função para gerar um número aleatório entre dois valores\r",
+											"function getRandomNumber(min, max) {\r",
+											"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+											"}\r",
+											"\r",
+											"// Função para gerar um CPF válido\r",
+											"function generateCPF() {\r",
+											"    var n1 = getRandomNumber(0, 9);\r",
+											"    var n2 = getRandomNumber(0, 9);\r",
+											"    var n3 = getRandomNumber(0, 9);\r",
+											"    var n4 = getRandomNumber(0, 9);\r",
+											"    var n5 = getRandomNumber(0, 9);\r",
+											"    var n6 = getRandomNumber(0, 9);\r",
+											"    var n7 = getRandomNumber(0, 9);\r",
+											"    var n8 = getRandomNumber(0, 9);\r",
+											"    var n9 = getRandomNumber(0, 9);\r",
+											"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+											"    d1 = 11 - (d1 % 11);\r",
+											"    if (d1 >= 10) {\r",
+											"        d1 = 0;\r",
+											"    }\r",
+											"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+											"    d2 = 11 - (d2 % 11);\r",
+											"    if (d2 >= 10) {\r",
+											"        d2 = 0;\r",
+											"    }\r",
+											"    return '' + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9 + d1 + d2;\r",
+											"}\r",
+											"\r",
+											"// Gerar CPF aleatório\r",
+											"var randomCPF = generateCPF();\r",
+											"\r",
+											"// Definir CPF gerado como variável global convertida em string\r",
+											"pm.globals.set(\"generatedCPF\", randomCPF.toString());\r",
+											"\r",
+											"\r",
+											"console.log(\"CPF gerado: \" + randomCPF);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idPessoa}}/cadastrar-adicional",
+									"protocol": "https",
+									"host": [
+										"{{integrationURL}}"
+									],
+									"path": [
+										"contas",
+										"api",
+										"contas",
+										"{{idPessoa}}",
+										"cadastrar-adicional"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "PIER108 - POST: /api/contas/{id}/pessoas/{id_pessoa}/gerar-cartao",
 							"event": [
 								{
@@ -25105,11 +25512,12 @@
 									"script": {
 										"exec": [
 											"//para gerar o cartão executar o endpoint:https://{{integrationURL}}/contas/api/contas?idPessoa=1298 e capturar o id gerado no request e passar como argumento neste endpoint. A var \"idConta\" esta armazendo o id gerado no endpoint acima.\r",
-											"console.log(pm.globals.get(\"idPessoa\"));\r",
+											"console.log(\"Valor da variável idProposta:\", pm.environment.get(\"idProposta\"));\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
 											"\r",
+											"",
 											""
 										],
 										"type": "text/javascript"
@@ -25129,7 +25537,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPeople}}/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/{{idPessoa}}/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -25140,7 +25548,7 @@
 										"contas",
 										"{{idConta}}",
 										"pessoas",
-										"{{idPeople}}",
+										"{{idPessoa}}",
 										"gerar-cartao"
 									]
 								}
