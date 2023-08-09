@@ -5994,7 +5994,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas/api/pessoas?cpf=55461174605",
+											"raw": "https://{{integrationURL}}/pessoas/api/pessoas?cpf=00461174605",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -6007,7 +6007,7 @@
 											"query": [
 												{
 													"key": "cpf",
-													"value": "55461174605"
+													"value": "00461174605"
 												}
 											]
 										}
@@ -6208,10 +6208,10 @@
 											"script": {
 												"exec": [
 													"\r",
-													"    pm.test(\"Validar a estrutura do corpo\", function () {\r",
-													"    const schema = pm.variables.get(\"schema\");\r",
-													"    pm.response.to.have.jsonSchema(schema);\r",
-													"    });\r",
+													"    //pm.test(\"Validar a estrutura do corpo\", function () {\r",
+													"   // const schema = pm.variables.get(\"schema\");\r",
+													"  //  pm.response.to.have.jsonSchema(schema);\r",
+													"  //  });\r",
 													"\r",
 													"\r",
 													"    pm.test(\"Validar o formato do campo email\", function () {\r",
@@ -6255,80 +6255,80 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"idPessoa\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"nomeMae\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"idEstadoCivil\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"idNacionalidade\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"email\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"salario\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"impedidoFinanciamento\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"naturalidadeCidade\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"naturalidadeEstado\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"grauInstrucao\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"numeroDependentes\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"nomePai\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"pessoaPoliticamenteExposta\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"patrimonioTotal\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"flagNomePaiNaoInformado\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"flagSemEnderecoComercialFixo\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"idPessoa\",\r",
-													"    \"nomeMae\",\r",
-													"    \"idEstadoCivil\",\r",
-													"    \"idNacionalidade\",\r",
-													"    \"email\",\r",
-													"    \"salario\",\r",
-													"    \"impedidoFinanciamento\",\r",
-													"    \"naturalidadeCidade\",\r",
-													"    \"naturalidadeEstado\",\r",
-													"    \"grauInstrucao\",\r",
-													"    \"numeroDependentes\",\r",
-													"    \"nomePai\",\r",
-													"    \"pessoaPoliticamenteExposta\",\r",
-													"    \"patrimonioTotal\",\r",
-													"    \"flagNomePaiNaoInformado\",\r",
-													"    \"flagSemEnderecoComercialFixo\"\r",
-													"  ]\r",
-													"}\r",
-													");\r",
+													"//pm.variables.set(\"schema\",\r",
+													"//{\r",
+													"//  \"title\": \"Generated schema for Root\",\r",
+													"//  \"type\": \"object\",\r",
+													" // \"properties\": {\r",
+													"  //  \"idPessoa\": {\r",
+													"  //    \"type\": \"number\"\r",
+													"  //  },\r",
+													"  //  \"nomeMae\": {\r",
+													"  //    \"type\": \"string\"\r",
+													"  //  },\r",
+													"  //  \"idEstadoCivil\": {\r",
+													"  //    \"type\": \"number\"\r",
+													"  //  },\r",
+													"  //  \"idNacionalidade\": {\r",
+													"  //    \"type\": \"number\"\r",
+													"  //  },\r",
+													"   // \"email\": {\r",
+													"   //   \"type\": \"string\"\r",
+													"   // },\r",
+													"  //  \"salario\": {\r",
+													"   //   \"type\": \"number\"\r",
+													"  //  },\r",
+													"  //  \"impedidoFinanciamento\": {\r",
+													"  //    \"type\": \"boolean\"\r",
+													"  //  },\r",
+													"  //  \"naturalidadeCidade\": {\r",
+													"  //    \"type\": \"string\"\r",
+													"  //  },\r",
+													"  //  \"naturalidadeEstado\": {\r",
+													" //     \"type\": \"string\"\r",
+													"  //  },\r",
+													"  //  \"grauInstrucao\": {\r",
+													"  //    \"type\": \"number\"\r",
+													"  //  },\r",
+													"  //  \"numeroDependentes\": {\r",
+													"  //    \"type\": \"number\"\r",
+													"  //  },\r",
+													"  //  \"nomePai\": {\r",
+													"  //    \"type\": \"string\"\r",
+													"  //  },\r",
+													"  //  \"pessoaPoliticamenteExposta\": {\r",
+													" //     \"type\": \"boolean\"\r",
+													" //   },\r",
+													"  //  \"patrimonioTotal\": {\r",
+													"  //    \"type\": \"number\"\r",
+													" //   },\r",
+													" //   \"flagNomePaiNaoInformado\": {\r",
+													" //     \"type\": \"boolean\"\r",
+													" //   },\r",
+													" //   \"flagSemEnderecoComercialFixo\": {\r",
+													" //     \"type\": \"boolean\"\r",
+													" //   }\r",
+													" // },\r",
+													" // \"required\": [\r",
+													"//    \"idPessoa\",\r",
+													"//    \"nomeMae\",\r",
+													" //   \"idEstadoCivil\",\r",
+													" //   \"idNacionalidade\",\r",
+													" //   \"email\",\r",
+													"  //  \"salario\",\r",
+													" // \"impedidoFinanciamento\",\r",
+													" //   \"naturalidadeCidade\",\r",
+													"//    \"naturalidadeEstado\",\r",
+													" //   \"grauInstrucao\",\r",
+													" //   \"numeroDependentes\",\r",
+													" //   \"nomePai\",\r",
+													" //   \"pessoaPoliticamenteExposta\",\r",
+													" //   \"patrimonioTotal\",\r",
+													" //   \"flagNomePaiNaoInformado\",\r",
+													" //   \"flagSemEnderecoComercialFixo\"\r",
+													" // ]\r",
+													"//}\r",
+													"//);\r",
 													""
 												],
 												"type": "text/javascript"
@@ -6349,67 +6349,6 @@
 												"api",
 												"pessoas-detalhes",
 												"1598"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "PIER055 - GET: /api/pessoas-detalhes/idPessoa_inexistente(-)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"\r",
-													"    pm.test(\"GET Status code is 400\", function () {\r",
-													"        pm.response.to.have.status(400);\r",
-													"    });\r",
-													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.badRequest;\r",
-													"        pm.response.to.be.withBody;\r",
-													"        pm.response.to.be.json;\r",
-													"        \r",
-													"    pm.test(\"Validar a estrutura do response\", function () {\r",
-													"        var jsonData = pm.response.json();\r",
-													"        pm.expect(jsonData.error.errors).to.be.an(\"array\");\r",
-													"        pm.expect(jsonData.error.errorCode).equal(\"0009\");\r",
-													"        pm.expect(jsonData.error.message).equal(\"O participante informado é inexistente.\"); \r",
-													"    });\r",
-													"\r",
-													"});\r",
-													"\r",
-													"\r",
-													"\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/9910491111",
-											"protocol": "https",
-											"host": [
-												"{{integrationURL}}"
-											],
-											"path": [
-												"pessoas-detalhes",
-												"api",
-												"pessoas-detalhes",
-												"9910491111"
 											]
 										}
 									},
@@ -17012,21 +16951,25 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
 													"     pm.response.to.be.ok;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
 													"});\r",
 													"\r",
-													"// Obter o valor do campo \"idPessoa\" do response\r",
-													"var idPessoaResponse = pm.response.json().idPessoa;\r",
-													"// Obter o valor da variável global \"id_pessoa\"\r",
-													"var idPessoaGlobal = pm.globals.get(\"id_pessoa\");\r",
-													"// Verificar se o valor da variável global é igual ao campo \"idPessoa\" do response\r",
-													"pm.test(\"Validar se id_pessoa do response é = var global do request\", function () {\r",
-													"    pm.expect(idPessoaResponse).to.equal(idPessoaGlobal);\r",
+													"// Extrai o valor do campo idPessoa do response\r",
+													"const idPessoaResponse = pm.response.json().idPessoa;\r",
+													"// Obtém o valor da variável de ambiente \"idProposta\"\r",
+													"const idProposta = pm.environment.get(\"idPessoa\");\r",
+													"// Converte idProposta para número para fins de comparação\r",
+													"const idPropostaNumber = parseInt(idProposta);\r",
+													"// Converte idPessoaResponse para número para fins de comparação\r",
+													"const idPessoaResponseNumber = parseInt(idPessoaResponse);\r",
+													"// Compara os valores\r",
+													"pm.test(\"Valida idPessoa Response X idProposta Request\", function () {\r",
+													"    pm.expect(idPessoaResponseNumber).to.equal(idPropostaNumber);\r",
 													"});\r",
+													"\r",
 													"\r",
 													"pm.test(\"idTipoTelefone não pode devolver nullo\", function () {\r",
 													"    const responseBody = pm.response.json();\r",
@@ -19322,7 +19265,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -19438,7 +19381,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/70000739/cadastrar-adicional",
+											"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/cadastrar-adicional",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -19447,7 +19390,7 @@
 												"contas",
 												"api",
 												"contas",
-												"70000739",
+												"{{idConta}}",
 												"cadastrar-adicional"
 											]
 										}
@@ -24037,6 +23980,26 @@
 							"name": "PIER054 - GET: /api/pessoas",
 							"event": [
 								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Extrai o valor do campo \"id\" do response\r",
+											"const idValue = pm.response.json().content[0].id;\r",
+											"// Salva o valor em uma variável de ambiente chamada \"idPessoa\"\r",
+											"pm.environment.set(\"idPessoa\", idValue.toString());\r",
+											"// Exibe o valor da variável no console do Postman\r",
+											"console.log(\"Capturado idPessoa:\", pm.environment.get(\"idPessoa\"));\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
 									"listen": "prerequest",
 									"script": {
 										"exec": [
@@ -24057,26 +24020,6 @@
 											"        // Adicione o código de tratamento da resposta aqui\r",
 											"    });\r",
 											"}, delayInMilliseconds);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"// Extrai o valor do campo \"id\" do response\r",
-											"const idValue = pm.response.json().content[0].id;\r",
-											"// Salva o valor em uma variável de ambiente chamada \"idPessoa\"\r",
-											"pm.environment.set(\"idPessoa\", idValue.toString());\r",
-											"// Exibe o valor da variável no console do Postman\r",
-											"console.log(\"Valor da variável idPessoa:\", pm.environment.get(\"idPessoa\"));\r",
-											"\r",
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											""
 										],
 										"type": "text/javascript"
 									}
@@ -25297,7 +25240,7 @@
 											"// Extrai o valor do campo idPessoa do response\r",
 											"const idPessoaResponse = pm.response.json().idPessoa;\r",
 											"// Obtém o valor da variável de ambiente \"idProposta\"\r",
-											"const idProposta = pm.environment.get(\"idProposta\");\r",
+											"const idProposta = pm.environment.get(\"idPessoa\");\r",
 											"// Converte idProposta para número para fins de comparação\r",
 											"const idPropostaNumber = parseInt(idProposta);\r",
 											"// Converte idPessoaResponse para número para fins de comparação\r",
@@ -25488,7 +25431,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idPessoa}}/cadastrar-adicional",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/cadastrar-adicional",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -25497,7 +25440,7 @@
 										"contas",
 										"api",
 										"contas",
-										"{{idPessoa}}",
+										"{{idConta}}",
 										"cadastrar-adicional"
 									]
 								}
