@@ -10261,7 +10261,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa=1497&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes?idPessoa={{idPessoa}}&nomeMae=Mae SilvaMae&idEstadoCivil=1&idProfissao=Engenheiro&idNaturezaOcupacao=9876987&idNacionalidade=76&numeroBanco=12345&numeroAgencia=12349&numeroContaCorrente=123456789&email=massa@email.com&naturalidadeCidade=São Paulo&naturalidadeEstado=SP&grauInstrucao=1&nomePai=Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Kruger com 80 caracteres Fred Kruger com 80 caracteres&numeroCnh=23143031556&pessoaPoliticamenteExposta=false&usuarioAlteracao=666&flagSemEnderecoComercialFixo=false&dataEmissaoCnh=2020-10-31T01:30:00.000-05:00&numeroDependentes=255&impedidoFinanciamento=false&nomeEmpresa=some company&nomeReferencia1=some nomeReferencia1&enderecoReferencia1=some enderecoReferencia1&nomeReferencia2=some nomeReferencia2&enderecoReferencia2=some enderecoReferencia2&chequeEspecial=0&flagNomePaiNaoInformado=false&salario=2200&patrimonioTotal=100000",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -10274,7 +10274,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "1497"
+													"value": "{{idPessoa}}"
 												},
 												{
 													"key": "nomeMae",
@@ -10326,7 +10326,7 @@
 												},
 												{
 													"key": "nomePai",
-													"value": "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+													"value": "Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Fred Kruger com 80 caracteres Kruger com 80 caracteres Fred Kruger com 80 caracteres"
 												},
 												{
 													"key": "numeroCnh",
@@ -13569,7 +13569,7 @@
 									"response": []
 								},
 								{
-									"name": "PIER097 - POST: /api/contas",
+									"name": "PIER097 - POST: /api/contas/incluir_conta(+)",
 									"event": [
 										{
 											"listen": "test",
@@ -13577,7 +13577,13 @@
 												"exec": [
 													"var jsonData = pm.response.json();\r",
 													"pm.globals.set(\"idConta\", jsonData.id);\r",
-													"console.log(pm.globals.get(\"idConta\"));\r",
+													"//console.log(pm.globals.get(\"idConta\"));\r",
+													"\r",
+													"const responseJson = pm.response.json();\r",
+													"const idConta = responseJson.id;\r",
+													"const idPessoa = responseJson.idPessoa;\r",
+													"\r",
+													"console.log(`idConta gerado: ${idConta} está associado ao idPessoa: ${idPessoa}`);\r",
 													"\r",
 													"\r",
 													"pm.test(\"Status code is 200\", function () {\r",
@@ -19925,6 +19931,11 @@
 													"pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
+													"const responseJson = pm.response.json();\r",
+													"const idConta = responseJson.idConta;\r",
+													"const idPessoa = responseJson.idPessoa;\r",
+													"const numeroReceitaFederal = responseJson.numeroReceitaFederal;\r",
+													"console.log(`O cpf gerado: ${numeroReceitaFederal} está associado ao idPessoa: ${idPessoa} e a conta: ${idConta}`);\r",
 													"\r",
 													""
 												],
@@ -19971,7 +19982,7 @@
 													"pm.globals.set(\"generatedCPF\", randomCPF.toString());\r",
 													"\r",
 													"\r",
-													"console.log(\"CPF gerado: \" + randomCPF);"
+													"//console.log(\"CPF gerado: \" + randomCPF);"
 												],
 												"type": "text/javascript"
 											}
@@ -19982,7 +19993,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da SilvaJosé Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"José Lima da Silva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"{{generatedCPF}}\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": {{idPessoa}},\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 18,\n                \"ddd\": \"11\",\n                \"telefone\": \"991882511\",\n                \"ramal\": \"1\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -20090,7 +20101,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"persist\": {\n        \"nome\": \"JoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilvaJoséLimadaSilva\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"06514795846\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 70000739,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
+											"raw": "{\n    \"persist\": {\n        \"nome\": \"Fred Jason Krugger Fred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason KruggerFred Jason Krugger\",\n        \"nomeImpresso\": \"JOSÉ L DA SILVA\",\n        \"numeroReceitaFederal\": \"06514795846\",\n        \"dataNascimento\": \"2020-10-31\",\n        \"sexo\": \"M\",\n        \"numeroIdentidade\": \"9999999\",\n        \"orgaoExpedidorIdentidade\": \"SSPPB\",\n        \"unidadeFederativaIdentidade\": \"DF\",\n        \"dataEmissaoIdentidade\": \"2020-10-31\",\n        \"idEstadoCivil\": 1,\n        \"idNacionalidade\": 1,\n        \"idParentesco\": 1,\n        \"email\": \"jose@exemplo.com\",\n        \"flagDeficienteVisual\": true,\n        \"id\": 70000739,\n        \"telefones\": [\n            {\n                \"idTipoTelefone\": 1,\n                \"ddd\": \"999\",\n                \"telefone\": \"999999999\",\n                \"ramal\": \"9999\"\n            }\n        ]\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -20098,7 +20109,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/cadastrar-adicional",
+											"raw": "https://{{integrationURL}}/contas/api/contas/80006115/cadastrar-adicional",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -20107,7 +20118,7 @@
 												"contas",
 												"api",
 												"contas",
-												"{{idConta}}",
+												"80006115",
 												"cadastrar-adicional"
 											]
 										}
@@ -20151,7 +20162,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/23456789999999999/cadastrar-adicional",
+											"raw": "https://{{integrationURL}}/contas/api/contas/22981464035/cadastrar-adicional",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -20160,7 +20171,7 @@
 												"contas",
 												"api",
 												"contas",
-												"23456789999999999",
+												"22981464035",
 												"cadastrar-adicional"
 											]
 										}
@@ -20204,7 +20215,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/23456789999999999/cadastrar-adicional",
+											"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/cadastrar-adicional",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -20213,7 +20224,7 @@
 												"contas",
 												"api",
 												"contas",
-												"23456789999999999",
+												"{{idConta}}",
 												"cadastrar-adicional"
 											]
 										}
@@ -24329,20 +24340,21 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"// Extrai o valor do campo id referente ao cadastro da Proposta\r",
-													"//const idValue = pm.response.json().solicitacao.id;\r",
-													"// Converte o valor para string\r",
-													"//const idValueAsString = idValue.toString();\r",
-													"// Salva o valor convertido em uma variável de ambiente chamada \"idProposta\"\r",
-													"//pm.environment.set(\"idProposta\", idValueAsString);\r",
-													"// Exibe o valor da variável convertida no console\r",
-													"//console.log(\"Valor da variável idProposta:\", pm.environment.get(\"idProposta\"));\r",
+													"//gerar proposta em um determinado numero de x\r",
 													"\r",
-													"// Obtém o tipo da variável idProposta para converte-la para string\r",
-													"//const tipoIdProposta = typeof pm.environment.get(\"idProposta\");\r",
-													"// Exibe o tipo da variável idProposta convertida\r",
-													"//console.log(\"Tipo da variável idProposta:\", tipoIdProposta);\r",
+													"//const numberOfRequests = 2;\r",
+													"//const url = `https://${pm.environment.get('integrationURL')}/propostas/api/propostas`;\r",
 													"\r",
+													"//for (let i = 0; i < numberOfRequests; i++) {\r",
+													" //   pm.sendRequest({\r",
+													"  //      url: url,\r",
+													"  //      method: 'GET'\r",
+													"   // }, function (err, response) {\r",
+													"   //     if (!err) {\r",
+													"   //         console.log(`Request ${i + 1} response: ${response.text()}`);\r",
+													"   //     }\r",
+													"   // });\r",
+													"//}\r",
 													"\r",
 													"\r",
 													"// Obter a resposta em formato JSON\r",
@@ -24351,11 +24363,6 @@
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
-													"\r",
-													"//setTimeout(function () {\r",
-													"   // pm.sendRequest(\"A resposta é valida e deve ter um corpo\");\r",
-													"//}, 5000);\r",
-													"\r",
 													"\r",
 													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
 													"     pm.response.to.be.ok;\r",
@@ -25898,7 +25905,12 @@
 												"exec": [
 													"var jsonData = pm.response.json();\r",
 													"pm.globals.set(\"idConta\", jsonData.id);\r",
-													"console.log(pm.globals.get(\"idConta\"));\r",
+													"//console.log(pm.globals.get(\"idConta\"));\r",
+													"\r",
+													"const responseJson = pm.response.json();\r",
+													"const idConta = responseJson.id;\r",
+													"const idPessoa = responseJson.idPessoa;\r",
+													"console.log(`idConta gerado: ${idConta} está associado ao idPessoa: ${idPessoa}`);\r",
 													"\r",
 													"\r",
 													"pm.test(\"Status code is 200\", function () {\r",
@@ -27747,8 +27759,12 @@
 												"exec": [
 													"var jsonData = pm.response.json();\r",
 													"pm.globals.set(\"idConta\", jsonData.id);\r",
-													"console.log(pm.globals.get(\"idConta\"));\r",
+													"//console.log(pm.globals.get(\"idConta\"));\r",
 													"\r",
+													"const responseJson = pm.response.json();\r",
+													"const idConta = responseJson.id;\r",
+													"const idPessoa = responseJson.idPessoa;\r",
+													"console.log(`idConta gerado: ${idConta} está associado ao idPessoa: ${idPessoa}`);\r",
 													"\r",
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
@@ -27963,7 +27979,11 @@
 													"console.log(\"Request generated at: \" + currentDateTime.toISOString());\r",
 													"\r",
 													"\r",
-													""
+													"const responseJson = pm.response.json();\r",
+													"const idConta = responseJson.idConta;\r",
+													"const idPessoa = responseJson.idPessoa;\r",
+													"const numeroReceitaFederal = responseJson.numeroReceitaFederal;\r",
+													"console.log(`O cpf gerado: ${numeroReceitaFederal} está associado ao idPessoa: ${idPessoa} e a conta: ${idConta}`);"
 												],
 												"type": "text/javascript"
 											}
@@ -27972,8 +27992,43 @@
 											"listen": "prerequest",
 											"script": {
 												"exec": [
-													"var currentDateTime = new Date();\r",
-													"pm.environment.set(\"requestDateTime\", currentDateTime.toISOString());"
+													"// Função para gerar um número aleatório entre dois valores\r",
+													"function getRandomNumber(min, max) {\r",
+													"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+													"}\r",
+													"\r",
+													"// Função para gerar um CPF válido\r",
+													"function generateCPF() {\r",
+													"    var n1 = getRandomNumber(0, 9);\r",
+													"    var n2 = getRandomNumber(0, 9);\r",
+													"    var n3 = getRandomNumber(0, 9);\r",
+													"    var n4 = getRandomNumber(0, 9);\r",
+													"    var n5 = getRandomNumber(0, 9);\r",
+													"    var n6 = getRandomNumber(0, 9);\r",
+													"    var n7 = getRandomNumber(0, 9);\r",
+													"    var n8 = getRandomNumber(0, 9);\r",
+													"    var n9 = getRandomNumber(0, 9);\r",
+													"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+													"    d1 = 11 - (d1 % 11);\r",
+													"    if (d1 >= 10) {\r",
+													"        d1 = 0;\r",
+													"    }\r",
+													"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+													"    d2 = 11 - (d2 % 11);\r",
+													"    if (d2 >= 10) {\r",
+													"        d2 = 0;\r",
+													"    }\r",
+													"    return '' + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9 + d1 + d2;\r",
+													"}\r",
+													"\r",
+													"// Gerar CPF aleatório\r",
+													"var randomCPF = generateCPF();\r",
+													"\r",
+													"// Definir CPF gerado como variável global convertida em string\r",
+													"pm.globals.set(\"generatedCPF\", randomCPF.toString());\r",
+													"\r",
+													"\r",
+													"console.log(\"CPF gerado: \" + randomCPF);"
 												],
 												"type": "text/javascript"
 											}
@@ -28211,6 +28266,132 @@
 									"path": [
 										"api",
 										"adesoes-pagamentos-sabados"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "psd",
+					"item": [
+						{
+							"name": "https://kong-psd-hml-gke.pernambucanas.com.br/api/contas-pessoas-service/v1/contas-credito?numeroReceitaFederal=77458470011",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://kong-psd-hml-gke.pernambucanas.com.br/api/contas-pessoas-service/v1/contas-credito?numeroReceitaFederal=77458470011",
+									"protocol": "https",
+									"host": [
+										"kong-psd-hml-gke",
+										"pernambucanas",
+										"com",
+										"br"
+									],
+									"path": [
+										"api",
+										"contas-pessoas-service",
+										"v1",
+										"contas-credito"
+									],
+									"query": [
+										{
+											"key": "numeroReceitaFederal",
+											"value": "77458470011"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "accenture",
+					"item": [
+						{
+							"name": "https://{{1fpayURL}}/party/v1/party/get-by-document",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Define a variável de ambiente \"baseURL\" de acordo com a solicitação atual\r",
+											"//pm.environment.set(\"baseURL\", \"https://api.example.com\");\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJraWQiOiIzK21rTFZZaVlKXC9KUzFyZ1RYSFk1SUM4cE05bEpEbTdxUzdpbklMMzVOWT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0M2ZmZjN1a2hzZW8wcmNzaGNjaW45a3ZmdCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiZ3JvdXBzXC91c2VyX21nbXQgZ3JvdXBzXC9mdWxsQWNjZXNzIiwiYXV0aF90aW1lIjoxNjkwODk5ODYwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuc2EtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3NhLWVhc3QtMV9pQTdRRTdQSzIiLCJleHAiOjE2OTA5MDM0NjAsImlhdCI6MTY5MDg5OTg2MCwidmVyc2lvbiI6MiwianRpIjoiMjhkYmIwN2ItZDQyNC00MjM5LTgzMjUtNDQ3OTM5MDVkZGQ4IiwiY2xpZW50X2lkIjoiNDNmZmYzdWtoc2VvMHJjc2hjY2luOWt2ZnQifQ.PMwXUOn0Z6qA7udBI_mPwHJOfnESVb3zbgFnIuzq21h-Zrnlzs2M_2w6M_Q7hIx2D7RDktwAHXja_UZlHqb1Sn3IxNYO9hWZvTDp9NCD-ddwNDAQs1X9mwyzRBoHpf8If-PINfe9CGNNCQqCCa1J57KM2jF08f0a7xc-UFrw64JhmzRAxf2gYc1DOntrNiBDh_Bgq_ESTXlsZoAE8JgUU5HnOVmie6NXtR8NKwRReNtEGF0f-mJ51ujCZ8ODRSoHpcCGWEYh4uyGcEW7Mja1_P7xp-_8eP85Wud7_ez8qKHDxff-DwYEv9kyXvWqQOA777ZfNm0FXOvZvO23lFRSDQ"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"documentNumber\": \"84171500052\"\n}"
+								},
+								"url": {
+									"raw": "https://{{1fpayURL}}/party/v1/party/get-by-document",
+									"protocol": "https",
+									"host": [
+										"{{1fpayURL}}"
+									],
+									"path": [
+										"party",
+										"v1",
+										"party",
+										"get-by-document"
 									]
 								}
 							},
