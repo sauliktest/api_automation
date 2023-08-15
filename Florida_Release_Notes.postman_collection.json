@@ -18795,7 +18795,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=111111111&ramal=10",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=&ddd=11&telefone=111111111&ramal=10",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -18812,7 +18812,7 @@
 												},
 												{
 													"key": "idPessoa",
-													"value": "{{id_pessoa}}"
+													"value": ""
 												},
 												{
 													"key": "ddd",
@@ -23723,7 +23723,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/wweerrr/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/a/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -23734,7 +23734,7 @@
 										"contas",
 										"{{idConta}}",
 										"pessoas",
-										"wweerrr",
+										"a",
 										"gerar-cartao"
 									]
 								}
@@ -28293,8 +28293,14 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
+											"   pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//pm.test(\"Status code is 400\", function () {\r",
+											"  //  if (pm.response.status !== 400) {\r",
+											" //       pm.expect.fail(`Esperava um status code 200, mas obteve ${pm.response.status}`);\r",
+											" //   }\r",
+											"//})"
 										],
 										"type": "text/javascript"
 									}
@@ -28353,6 +28359,10 @@
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Variável 1fpayURL foi definida corretamente\", function () {\r",
+											"    pm.expect(pm.variables.get(\"1fpayURL\")).to.exist;\r",
 											"});\r",
 											""
 										],
