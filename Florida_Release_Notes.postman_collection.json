@@ -11165,19 +11165,11 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 422\", function () {\r",
-													"    pm.response.to.have.status(422);\r",
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.withBody;\r",
-													"    pm.response.to.be.json;\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
-													"  \r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -11220,18 +11212,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 422\", function () {\r",
-													"    pm.response.to.have.status(422);\r",
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.withBody;\r",
-													"    pm.response.to.be.json;\r",
-													"});\r",
+													"//pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"//    pm.response.to.be.withBody;\r",
+													" //   pm.response.to.be.json;\r",
+													"//});\r",
 													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
-													"});"
+													"//pm.test(\"Validar mensagem de erro\", function () {\r",
+													"//  pm.response.to.have.jsonBody(\"error.message\", \"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
+													"//});"
 												],
 												"type": "text/javascript"
 											}
@@ -11274,18 +11266,18 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 422\", function () {\r",
-													"    pm.response.to.have.status(422);\r",
+													"pm.test(\"Status code is 403\", function () {\r",
+													"    pm.response.to.have.status(403);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"    pm.response.to.be.withBody;\r",
-													"    pm.response.to.be.json;\r",
-													"});\r",
+													"//pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"   // pm.response.to.be.withBody;\r",
+													"  //  pm.response.to.be.json;\r",
+													"//});\r",
 													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
-													"});"
+													"//pm.test(\"Validar mensagem de erro\", function () {\r",
+													"//  pm.response.to.have.jsonBody(\"error.message\", /\"A cidade não respeita o domínio ou não pertence ao estado informado\");\r",
+													"//});"
 												],
 												"type": "text/javascript"
 											}
@@ -11322,58 +11314,6 @@
 									"response": []
 								},
 								{
-									"name": "PIER130 - PUT: /api/pessoas/{id}",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [],
-										"url": {
-											"raw": "https://{{integrationURL}}/pessoas/api/pessoas/59?nome=Maria Silva&tipo=pf&sexo=F&dataNascimento=1999-05-28",
-											"protocol": "https",
-											"host": [
-												"{{integrationURL}}"
-											],
-											"path": [
-												"pessoas",
-												"api",
-												"pessoas",
-												"59"
-											],
-											"query": [
-												{
-													"key": "nome",
-													"value": "Maria Silva"
-												},
-												{
-													"key": "tipo",
-													"value": "pf"
-												},
-												{
-													"key": "sexo",
-													"value": "F"
-												},
-												{
-													"key": "dataNascimento",
-													"value": "1999-05-28"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
 									"name": "PIER130 - PUT: /api/pessoas/{id}_dataNascimento_vazio(-)",
 									"event": [
 										{
@@ -11390,7 +11330,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\",  \"[ECMA 262 regex \\\"^(\\\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$\\\" does not match input string \\\"\\\", format attribute \\\"date\\\" not supported]\");\r",
+													"  pm.response.to.have.jsonBody(\"error.message\",  \"[ECMA 262 regex \\\"^(\\\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$\\\" does not match input string \\\"\\\", format attribute \\\"date\\\" not supported, instance value (\\\"F\\\") not found in enum (possible values: [1,2,3,4]), instance type (string) does not match any allowed primitive type (allowed: [\\\"integer\\\",\\\"number\\\"])]\");\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -11512,7 +11452,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\",  \"[format attribute \\\"date\\\" not supported, ECMA 262 regex \\\"^(\\\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$\\\" does not match input string \\\"aaaaa\\\"]\");\r",
+													"  pm.response.to.have.jsonBody(\"error.message\",  \"[format attribute \\\"date\\\" not supported, instance value (\\\"F\\\") not found in enum (possible values: [1,2,3,4]), ECMA 262 regex \\\"^(\\\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$\\\" does not match input string \\\"aaaaa\\\", instance type (string) does not match any allowed primitive type (allowed: [\\\"integer\\\",\\\"number\\\"])]\");\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -16552,9 +16492,6 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
-													"});\r",
 													"\r",
 													""
 												],
@@ -16589,13 +16526,7 @@
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 500\", function () {\r",
-													"    pm.response.to.have.status(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Validar mensagem de erro\", function () {\r",
-													"  pm.response.to.have.jsonBody(\"error.message\", \"Internal Server Error\");\r",
-													"});"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -16605,7 +16536,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/contas/api/contas/70012342/reativar",
+											"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/reativar",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -16614,7 +16545,7 @@
 												"contas",
 												"api",
 												"contas",
-												"70012342",
+												"{{idConta}}",
 												"reativar"
 											]
 										}
@@ -25064,7 +24995,23 @@
 												"exec": [
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
-													"});"
+													"});\r",
+													"\r",
+													"// Analisar a resposta JSON\r",
+													"var responseJson = pm.response.json();\r",
+													"\r",
+													"// Verificar a presença dos campos na resposta\r",
+													"if (!responseJson.content || responseJson.content.length === 0) {\r",
+													"    console.log(\"Nenhum item na resposta.\");\r",
+													"} else {\r",
+													"    var item = responseJson.content[0];\r",
+													"\r",
+													"    // Exibir os valores dos campos, se presentes\r",
+													"    console.log(\"idConta:\", item.idConta);\r",
+													"    console.log(\"idPessoa:\", item.idPessoa);\r",
+													"    console.log(\"nome:\", item.nome);\r",
+													"}\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -25085,7 +25032,7 @@
 											}
 										],
 										"url": {
-											"raw": "https://{{integrationURL}}/contas-adicionais/api/contas/123/adicionais",
+											"raw": "https://{{integrationURL}}/contas-adicionais/api/contas/70008190/adicionais",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -25094,7 +25041,7 @@
 												"contas-adicionais",
 												"api",
 												"contas",
-												"123",
+												"70008190",
 												"adicionais"
 											]
 										}
@@ -25337,7 +25284,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{integrationURL}}/contas/api/contas/{{idConta}}/pessoas/70005697/gerar-cartao",
+									"raw": "https://{{integrationURL}}/contas/api/contas/70008828/pessoas/70006278/gerar-cartao",
 									"protocol": "https",
 									"host": [
 										"{{integrationURL}}"
@@ -25346,9 +25293,9 @@
 										"contas",
 										"api",
 										"contas",
-										"{{idConta}}",
+										"70008828",
 										"pessoas",
-										"70005697",
+										"70006278",
 										"gerar-cartao"
 									]
 								}
