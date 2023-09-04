@@ -1,4 +1,4 @@
-name: htmlextra >> Automation API Tests from Postman Collection ci-integração.
+name: Newman Automation API Tests by Postman.
 
 on:
   push:
